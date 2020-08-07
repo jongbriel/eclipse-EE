@@ -13,8 +13,8 @@ public class AddressDao3 {
 	/************** DB접속정보 **************/
 	String driverClass = "oracle.jdbc.OracleDriver";
 	String url = "jdbc:oracle:thin:@182.237.126.19:1521:XE";
-	String user = "javapython31";
-	String password = "javapython31";
+	String user = "javapython9";
+	String password = "javapython9";
 	public void create(String id, String name, String phone, String address) throws Exception {
 
 		String insertSql = "insert into address values(address_no_seq.nextval,'" + id + "','" + name + "','" + phone
@@ -70,8 +70,7 @@ public class AddressDao3 {
 
 	}
 	public int update(Address updateAddress)  throws Exception{
-		String updateSql=
-"update address set id=?,name=?,phone=?,address=? where no=?";
+		String updateSql = "update address set id=?,name=?,phone=?,address=? where no=?";
 		Class.forName(driverClass);
 		Connection con=DriverManager.getConnection(url,user,password);
 		PreparedStatement pstmt=con.prepareStatement(updateSql);
