@@ -21,6 +21,7 @@ public class ClassLoadingInstanceCreateMain {
 		
 		/*
 		Class driverClazz = Class.forName("connection.StrongDriver");
+		
 		//드라이버 클래스의 기본 생성자 호출, 오브젝트를 반환하니깐 캐스팅
 		//이 클래스의 기본생성자 호출. 생성자를 직접 호출안해도 가능 그렇기에 의존성 준다.
 		//그러나 보통 기본생성자를 프라이빗 해놔서 접근 못함 

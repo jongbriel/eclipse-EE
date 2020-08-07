@@ -1,11 +1,11 @@
-package dao.address;
+package dao.address.second;
 /*
 이름      널?       유형            
 ------- -------- ------------- 
 NO      NOT NULL NUMBER(4)     
 ID               VARCHAR2(20)  
 NAME             VARCHAR2(50)  
-PHONE            VARCHAR2(50)  
+PHONE            VARCHAR2 (50)  
 ADDRESS          VARCHAR2(100) 
  */
 public class AddressDao2TestMain {

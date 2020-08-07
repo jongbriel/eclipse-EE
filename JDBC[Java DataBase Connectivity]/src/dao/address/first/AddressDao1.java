@@ -1,4 +1,4 @@
-package dao.address;
+package dao.address.first;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -133,7 +133,6 @@ public class AddressDao1 {
 			never null
 		 */
 		
-		
 		ResultSet rs=stmt.executeQuery(selectSql);
 		
 		/*
@@ -148,6 +147,8 @@ public class AddressDao1 {
 		 */
 		
 		//rs.getInt("no");
+		
+				
 		if(rs.next()) {
 			/*
 			  DB NUMBER			--> java int,double
