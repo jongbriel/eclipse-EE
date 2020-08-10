@@ -2,8 +2,11 @@ package dao.dept;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import dao.address.Address;
 
 /**
  * 
@@ -13,11 +16,15 @@ import java.util.Map;
  */
 public interface DeptDao {
 	// 부서 등록
-	public void insert(Dept deparment) throws Exception;
+	public int insert(Dept deparment) throws Exception;
+	//부서 번호로 삭제
+	public int delete(int deptNo) throws Exception;
+	//부서 업데이트
+	public int update(Dept updateDept)  throws Exception;
 	// 부서번호로 부서정보 반환
 	public Dept selectByNo(int deptno) throws Exception;
 	// 부서 전체목록 반환
-	public List selectByAll() throws Exception;
+	public ArrayList<Dept> selectByAll() throws Exception;
 	
 }
 

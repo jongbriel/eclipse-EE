@@ -42,7 +42,7 @@ public class AddressDaoImpl implements AddressDao {
 	
 	@Override
 	public int update(Address updateAddress)  throws Exception{
-			Connection con=ConnectionFactory.getConnection();
+		Connection con=ConnectionFactory.getConnection();
 		PreparedStatement pstmt=con.prepareStatement(AddressSQL.UPDATE);
 		pstmt.setString(1, updateAddress.getId());
 		pstmt.setString(2, updateAddress.getName());
