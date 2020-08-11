@@ -156,7 +156,7 @@
         
 
       
-      <Context docBase="class5" path="/class5" reloadable="true" source="org.eclipse.jst.jee.server:class5"/><Context docBase="root" path="/" reloadable="true" source="org.eclipse.jst.jee.server:root"/><Context docBase="hmarket" path="/gmarket" reloadable="true" source="org.eclipse.jst.jee.server:hmarket"/></Host>
+      <Context docBase="servletSite" path="/servletSite" reloadable="true" source="org.eclipse.jst.jee.server:servletSite"/></Host>
     </Engine>
   </Service>
 </Server>
