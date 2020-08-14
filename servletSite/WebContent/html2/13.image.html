@@ -2,16 +2,38 @@
 
 <html>
 <head>
-	<meta charset="euc-kr" />	
+	<meta charset="UTF-8" />	
 	<title>image 요소 연습</title>
 </head>
 <body>
+	<h2>절대경로[http://~로 시작하는 경로]</h2>
+	<p>
+		<img alt="다음로고" src="https://t1.daumcdn.net/daumtop_chanel/op/20200723055344399.png">
+	</p>
+	<h2>절대경로[http://~로 시작하는 경로]servletSite안의 리소스</h2>
+	<p>
+		<img alt="펭귄1" src="http://192.168.15.9/servletSite/html2/images/penguin/penguin1.gif">
+		<img alt="펭귄2" src="http://192.168.15.9/servletSite/html2/images/penguin/penguin2.gif">
+		<img alt="펭귄3" src="http://192.168.15.9/servletSite/html2/images/penguin/penguin3.gif">
+		<img alt="오리1" src="http://192.168.15.9/servletSite/html2/images/penguin/ori1.gif">
+		<img src="http://192.168.15.9/servletSite/tomcat.gif" width="100px" height="100px">
+	</p>
 	
-	<img src="../image/2.jpg" 
-		alt="이미지가 없을 때 표시할 내용" align="middle"
-		width="500px" height="500px" />
-	XXXX님 사진
-
+	<h2>상대경로[http://~로 시작하지 않는 경로]</h2>
+	<p>
+		<img alt="펭귄1" src="images/penguin/penguin1.gif">
+		<img alt="펭귄2" src="images/penguin/penguin2.gif">
+		<img alt="펭귄3" src="images/penguin/penguin3.gif">
+		<img alt="오리1" src="images/penguin/ori1.gif">
+		<img src="../tomcat.gif" width="100px" height="100px">
+	</p>
+	
+	<p>
+		페이지뷰수[요청횟수]는 <img src=../images/3.png><img src=../images/5.png><img src=../images/9.png>입니다.
+	</p>
+	
+	
+	
 </body>
 </html>
 

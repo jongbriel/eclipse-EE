@@ -9,6 +9,22 @@
   	<servlet-name>gugudan</servlet-name>
   	<servlet-class>com.itwill.servlet.GugudanServlet</servlet-class>
   </servlet>
+  
+  <!--  
+  <servlet>
+  	<servlet-name>lifecycle counter</servlet-name>
+  	<servlet-class>com.itwill.servlet.LifeCycleCounterServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  <servlet-name>lifecycle counter</servlet-name>
+  <url-pattern>/lifecycle.do</url-pattern>
+  <url-pattern>/lifecycle.html</url-pattern>
+  <url-pattern>/lifecycle</url-pattern>
+  <url-pattern>/lifecycle.nhn</url-pattern>
+  </servlet-mapping>
+  -->
+  
   <servlet-mapping>
   	<servlet-name>gugudan</servlet-name>
   	<url-pattern>/gugudan.do</url-pattern>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		a tag : 다른 페이지 특정 위치로 이동할 때 사용하는 태그
+		<hr>
+	</div>
+	<ul>
+		<li>----절대경로[URL](http://~~~)----</li>
+		<li><a href="http://www.naver.com" target="_self">네이버</a>
+		<li><a href="http://www.daum.net">다음</a>
+		<li><a href="http://192.168.15.9/servletSite/gugudan.do"target="_blank">99단</a>
+		<li>----절대경로[URL]내서버 servletSite context 안의 리소스에 접근할때----</li>
+		<li><a href="http://192.168.15.9/servletSite/gugudan.do">내 구구단[서블릿]</a></li>
+		<li><a href="http://192.168.15.9/servletSite/index.html">내 index.htm[HTML]</a></li>
+		<li><a href="http://192.168.15.9/servletSite/tomcat.gif">내 tomcat.gif[이미지]</a></li>
+		<li><a href="http://192.168.15.9/servletSite/html2/12.hyperlink.html">내 html12.hyperlink.htm[HTML]</a></li>
+		
+		<li>----상대경로[URL]내서버 servletSite context 안의 리소스에 접근할때----</li>
+		<li><a href="../gugudan.do">내 구구단[서블릿]</a></li>
+		<li><a href="../index.html">내 index.htm[HTML]</a></li>
+		<li><a href="../tomcat.gif">내 tomcat.gif[이미지]</a></li>
+		<li><a href="12.hyperlink.html">내 html12.hyperlink.htm[HTML]</a></li>
+		<li><a href="./12.hyperlink.html">내 html12.hyperlink.htm[HTML]</a></li>
+		
+		<li><a href="images/penguin/penguin1.gif">/servletSite/html2/images/penguin/penguin.gif</a></li>
+		<li><a href="images/penguin/penguin2.gif">/servletSite/html2/images/penguin/penguin.gif</a></li>
+		<li><a href="images/penguin/penguin3.gif">/servletSite/html2/images/penguin/penguin.gif</a></li>
+		
+		
+		
+	</ul>
+</body>
+</html>
