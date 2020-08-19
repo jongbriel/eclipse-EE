@@ -32,85 +32,90 @@
 		<!-- header start -->
 		<div id="header">
 		<!-- include_common_top.jsp start-->
-			<h1>
-				<a href="">WEB SAMPLE SITE</a>
-			</h1>
-			<!-- include_common_top.jsp end-->
+		<jsp:include page="include_common_top.jsp"/>	
+		<!-- include_common_top.jsp end-->
 		</div>
 		<!-- header end -->
 		<!-- navigation start-->
 		<div id="navigation">
 			<!-- include_common_left.jsp start-->
-			<p>
-				<strong>메 뉴</strong>
-			</p>
-			<ul>
-				<li><a href="guest_list.jsp">방명록</a></li>
-				<li><a href="member_list.html">회원관리</a></li>
-				<li><a href="board_list.html">게시판</a></li>
-			</ul>
+			<jsp:include page="include_common_left.jsp"/>
 			<!-- include_common_left.jsp end-->
 		</div>
 		<!-- navigation end-->
 		<!-- wrapper content start -->
 		<div id="wrapper">
 			
+
+
+
+
 <div id="content">
-	<table width=0 border=0 cellpadding=0 cellspacing=0>
+	<table border=0 cellpadding=0 cellspacing=0>
 		<tr>
-			<td>
-				<!--contents--> <br />
+			<td><br />
 				<table style="padding-left: 10px" border=0 cellpadding=0
 					cellspacing=0>
 					<tr>
 						<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>방명록 관리 -
-								방명록 쓰기</b></td>
+								방명록 수정</b></td>
 					</tr>
-				</table> <!-- guest write Form  -->
+				</table> <!-- modify Form  -->
 				<form name="f" method="post">
+					<input type="hidden" name="guest_no" value="25" />
 					<table border="0" cellpadding="0" cellspacing="1" width="590"
 						bgcolor="BBBBBB">
 						<tr>
-							<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
-							<td width=490 align="left" bgcolor="ffffff"
-								style="padding-left: 10px"><input type="text"
-								style="width: 150" name="guest_name"></td>
+							<td width=100 align=center bgcolor="E6ECDE" height="22">번호</td>
+							<td align="left" width=490 bgcolor="ffffff"
+								style="padding-left: 10px">25</td>
 						</tr>
 						<tr>
-							<td width=100 align=center bgcolor="E6ECDE" height="22">이메일</td>
-							<td width=490 align="left" bgcolor="ffffff"
+							<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
+							<td align="left" width=490 bgcolor="ffffff"
 								style="padding-left: 10px"><input type="text"
-								style="width: 150" name="guest_email"></td>
+								style="width: 150" name="guest_name"
+								value="수정"></td>
 						</tr>
 						<tr>
 							<td width=100 align=center bgcolor="E6ECDE" height="22">홈페이지</td>
-							<td width=490 align="left" bgcolor="ffffff"
+							<td align="left" width=490 bgcolor="ffffff"
 								style="padding-left: 10px"><input type="text"
-								style="width: 150" name="guest_homepage"></td>
+								style="width: 150" name="guest_homepage"
+								value="xzcxz"></td>
 						</tr>
 						<tr>
-							<td width=100 align=center bgcolor="E6ECDE" height="22">타이틀</td>
-							<td width=490 align="left" bgcolor="ffffff"
+							<td width=100 align=center bgcolor="E6ECDE" height="22">이메일</td>
+							<td align="left" width=490 bgcolor="ffffff"
 								style="padding-left: 10px"><input type="text"
-								style="width: 240" name="guest_title"></td>
+								style="width: 240" name="guest_email"
+								value="수정 "></td>
+						</tr>
+						<tr>
+							<td width=100 align=center bgcolor="E6ECDE" height="22">제목</td>
+							<td align="left" width=490 bgcolor="ffffff"
+								style="padding-left: 10px"><input type="text"
+								style="width: 240" name="guest_title"
+								value="수정 "></td>
 						</tr>
 						<tr>
 							<td width=100 align=center bgcolor="E6ECDE" height="22">내용</td>
-							<td width=490 align="left" bgcolor="ffffff"
-								style="padding-left: 10px">
-								<textarea wrap="soft" style="width:240px" rows="10" name="guest_content"></textarea>
+							<td align="left" width=490 bgcolor="ffffff"
+								style="padding-left: 10px"><textarea wrap="soft"
+									style="width: 240px" rows="10" name="guest_content">수정ㄴㅁㅇhjkjhhj</textarea>
+
 							</td>
 						</tr>
 					</table>
-				</form> <br />
+				</form>
+
 				<table width=590 border=0 cellpadding=0 cellspacing=0>
 					<tr>
-						<td align=center><input type="button" value="방명록쓰기"
-							onClick="guestCreate();"> &nbsp; <input type="button"
-							value="방명록목록" onClick="guestList()"></td>
+						<td align=center><input type="button" value="수정"
+							onClick="guestModifyAction()"> &nbsp; <input type="button"
+							value="목록" onClick="guestList()"></td>
 					</tr>
-				</table>
-			</td>
+				</table></td>
 		</tr>
 	</table>
 </div>
@@ -123,6 +128,7 @@
 			<%@include file="include_common_bottom.jspf" %>
 			<!-- include_common_bottom.jsp end-->
 		</div>
+		<!-- footer end -->
 	</div>
 	<!--container end-->
 </body>

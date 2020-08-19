@@ -1,28 +1,22 @@
+<%@page import="com.itwill.guest.Guest"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.itwill.guest.GuestService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%
+	GuestService guestService=new GuestService();
+	ArrayList<Guest> guestList=guestService.selectAll();
+%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <title>방명록 관리</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-
-
-
-
-
 <link rel="stylesheet"
 	href="css/styles.css">
 <link rel="stylesheet"
 	href="css/guest.css">
-
-
-
-
-
-
 <script	src="js/guest.js"></script>
 </head>
 <body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
@@ -32,23 +26,14 @@
 		<!-- header start -->
 		<div id="header">
 		<!-- include_common_top.jsp start-->
-			<h1>
-				<a href="">WEB SAMPLE SITE</a>
-			</h1>
-			<!-- include_common_top.jsp end-->
+		<jsp:include page="include_common_top.jsp"/>
+		<!-- include_common_top.jsp end-->
 		</div>
 		<!-- header end -->
 		<!-- navigation start-->
 		<div id="navigation">
 			<!-- include_common_left.jsp start-->
-			<p>
-				<strong>메 뉴</strong>
-			</p>
-			<ul>
-				<li><a href="guest_list.jsp">방명록</a></li>
-				<li><a href="member_list.html">회원관리</a></li>
-				<li><a href="board_list.html">게시판</a></li>
-			</ul>
+			<jsp:include page="include_common_left.jsp"/>
 			<!-- include_common_left.jsp end-->
 		</div>
 		<!-- navigation end-->
@@ -80,36 +65,19 @@
 						<td width=120 align=center bgcolor="E6ECDE">이름</td>
 						<td width=120 align=center bgcolor="E6ECDE">날짜</td>
 					</tr>
-					
+					<!-- guest list loop start -->
+					<%for(Guest guest:guestList){ %>
 					<tr>
-						<td width=50 align=center bgcolor="ffffff" height="20">43</td>
+						<td width=50 align=center bgcolor="ffffff" height="20"><%=guest.getGuest_no()%></td>
 						<td width=300 bgcolor="ffffff" style="padding-left: 10"><a
-							href="guest_view.jsp?guest_no=43" class="user">
-								hj
+							href="guest_view.jsp?guest_no=<%=guest.getGuest_no()%>" class="user">
+								<%=guest.getGuest_title()%>
 						</a></td>
-						<td width=120 align=center bgcolor="ffffff">dfdf</td>
-						<td width=120 align=center bgcolor="ffffff">2015-03-19</td>
+						<td width=120 align=center bgcolor="ffffff"><%=guest.getGuest_name()%></td>
+						<td width=120 align=center bgcolor="ffffff"><%=guest.getGuest_date().substring(0,10)%></td>
 					</tr>
-					
-					<tr>
-						<td width=50 align=center bgcolor="ffffff" height="20">41</td>
-						<td width=300 bgcolor="ffffff" style="padding-left: 10"><a
-							href="guest_view.jsp?guest_no=41" class="user">
-								sdf
-						</a></td>
-						<td width=120 align=center bgcolor="ffffff">df</td>
-						<td width=120 align=center bgcolor="ffffff">2015-03-19</td>
-					</tr>
-					
-					<tr>
-						<td width=50 align=center bgcolor="ffffff" height="20">25</td>
-						<td width=300 bgcolor="ffffff" style="padding-left: 10"><a
-							href="guest_view.jsp?guest_no=25" class="user">
-								수정 
-						</a></td>
-						<td width=120 align=center bgcolor="ffffff">수정</td>
-						<td width=120 align=center bgcolor="ffffff">2015-03-18</td>
-					</tr>
+					<%}%>
+					<!--guest list loop end  -->
 					
 					
 				</table>

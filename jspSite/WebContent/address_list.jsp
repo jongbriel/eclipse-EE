@@ -6,8 +6,7 @@
 <%
 try{    
 	AddressService addressService = new AddressService();
-	ArrayList<Address> addressList = new ArrayList<Address>();
-	addressList=addressService.selectAll();
+	ArrayList<Address> addressList = addressService.selectAll();
 %>
 <!DOCTYPE html>
 <html>
@@ -22,8 +21,8 @@ try{
 </div>
 <div>
 	<ul>
-	<%for(int i=0;i<addressList.size();i++) { %>
-		<li><a href='address_detail.jsp?no=<%=addressList.get(i).getNo()%>'><%=addressList.get(i).getNo()%> <%=addressList.get(i).getName()%></a></li>
+	<%for(Address address:addressList) { %>
+		<li><a href='address_detail.jsp?no=<%=address.getNo()%>'><%=address.getNo()%> <%=address.getName()%></a></li>
 	<%}%>
 	</ul>
 </div>

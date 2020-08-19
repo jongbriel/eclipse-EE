@@ -11,7 +11,7 @@
 <hr/>
 <ol>
 	<li><a href="7-1.default_response_redirect.jsp">리다이렉트</a></li>
-	<li><a href="7-1.default_response_senderror.jsp">에로전송</a></li>
+	<li><a href="7-1.default_response_senderror.jsp">에러전송</a></li>
 </ol>
 </body>
 </html>

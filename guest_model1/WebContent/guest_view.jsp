@@ -1,6 +1,16 @@
+<%@page import="com.itwill.guest.Guest"%>
+<%@page import="com.itwill.guest.GuestService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%
+	GuestService guestService = new GuestService();
+	String noStr = request.getParameter("guest_no");
+	if(noStr==null||noStr.equals("")){
+		response.sendRedirect("guest_list.jsp");
+		return;
+	}
+	Guest guest = guestService.selectByNo(Integer.parseInt(noStr));
+%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -32,23 +42,14 @@
 		<!-- header start -->
 		<div id="header">
 		<!-- include_common_top.jsp start-->
-			<h1>
-				<a href="">WEB SAMPLE SITE</a>
-			</h1>
-			<!-- include_common_top.jsp end-->
+		<jsp:include page="include_common_top.jsp"/>	
+		<!-- include_common_top.jsp end-->
 		</div>
 		<!-- header end -->
 		<!-- navigation start-->
 		<div id="navigation">
 			<!-- include_common_left.jsp start-->
-			<p>
-				<strong>메 뉴</strong>
-			</p>
-			<ul>
-				<li><a href="guest_list.jsp">방명록</a></li>
-				<li><a href="member_list.html">회원관리</a></li>
-				<li><a href="board_list.html">게시판</a></li>
-			</ul>
+			<jsp:include page="include_common_left.jsp"/>
 			<!-- include_common_left.jsp end-->
 		</div>
 		<!-- navigation end-->
@@ -77,31 +78,31 @@
 						<tr>
 							<td width=100 align=center bgcolor="E6ECDE" height="22">번호</td>
 							<td width=490 bgcolor="ffffff" align="left"
-								style="padding-left: 10px">25</td>
+								style="padding-left: 10px"><%=guest.getGuest_no()%></td>
 						</tr>
 						<tr>
 							<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
 							<td width=490 bgcolor="ffffff" align="left"
-								style="padding-left: 10px">수정</td>
+								style="padding-left: 10px"><%=guest.getGuest_name()%></td>
 						</tr>
 						<tr>
 							<td width=100 align=center bgcolor="E6ECDE" height="22">날짜</td>
 							<td width=490 bgcolor="ffffff" align="left"
-								style="padding-left: 10px">2015-03-18</td>
+								style="padding-left: 10px"><%=guest.getGuest_date()%></td>
 						<tr>
 							<td width=100 align=center bgcolor="E6ECDE" height="22">홈페이지</td>
 							<td width=490 bgcolor="ffffff" align="left"
-								style="padding-left: 10px">xzcxz</td>
+								style="padding-left: 10px"><%=guest.getGuest_homepage()%></td>
 						</tr>
 						<tr>
 							<td width=100 align=center bgcolor="E6ECDE" height="22">제목</td>
 							<td width=490 bgcolor="ffffff" align="left"
-								style="padding-left: 10px">수정 </td>
+								style="padding-left: 10px"><%=guest.getGuest_title()%></td>
 						</tr>
 						<tr>
 							<td width=100 align=center bgcolor="E6ECDE" height="110">내용</td>
 							<td width=490 bgcolor="ffffff" align="left"
-								style="padding-left: 10px">수정ㄴㅁㅇhjkjhhj</td>
+								style="padding-left: 10px"><%=guest.getGuest_content()%></td>
 						</tr>
 					</table>
 				</form> <br />

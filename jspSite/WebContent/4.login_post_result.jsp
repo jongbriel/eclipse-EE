@@ -1,6 +1,10 @@
 <%@page import="java.net.URLEncoder"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page 
+	language="java" 
+	contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+    
+    %>
 <%
 	if(request.getMethod().equalsIgnoreCase("GET")){
 		response.sendRedirect("4.login_post_form.jsp");
@@ -32,9 +36,8 @@
 		out.println("<h3>"+id+"님 로그인성공</h3>");
 		out.println("<a href='1.hello.jsp'>메인으로</a>");
 	}else{
-		//한글같은경우 내가 직접 리다이렉션으로 걸어줄때는 따로 인코딩 해줘야함
-		String msg = URLEncoder.encode("아이디패쓰워드확인", "UTF-8");
-		response.sendRedirect("4.login_post_form.jsp?msg="+msg);
+		String msg=URLEncoder.encode("아이디패쓰워드확인", "UTF-8");
+		response.sendRedirect("4.login_post_form.jsp?msg="+msg+"&id="+id+"&pass="+pass);
 		/*
 		out.println("<h3>"+id+"님 로그인실패</h3>");
 		out.println("<a href='4.login_post_form.jsp'>다시로그인</a>");
