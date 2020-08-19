@@ -21,16 +21,13 @@ public class AddressListServlet extends HttpServlet {
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
+		
+		try {
 		PrintWriter out=response.getWriter();
 		
 		AddressService addressService = new AddressService();
 		ArrayList<Address> addressList = new ArrayList<Address>();
-		
-		try {
-			addressList = addressService.selectAll();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		addressList = addressService.selectAll();
 		
 		out.println("<!DOCTYPE html>");
 		out.println("<html>");
@@ -41,17 +38,30 @@ public class AddressListServlet extends HttpServlet {
 		out.println("<body>");
 		out.println("<h1>[주소록리스트]</h1><hr>");
 		out.println("<div>");
-		out.println("	<a href='address_insert_action.do'>[주소록쓰기]</a>");
+		out.println("	<a href='address_insert_action.do'>[주소록쓰기폼]</a>");
 		out.println("</div>");
 		out.println("<div>");
 		out.println("	<ul>");
-		for (int i = 0; i < addressList.size(); i++) {
-			out.println("		<li><a href='address_detail.do?no="+addressList.get(i).getNo()+"'>"+addressList.get(i).getNo()+" "+addressList.get(i).getName()+" </a></li>");
+		/*
+		 * for (int i = 0; i < addressList.size(); i++) {
+		 * out.println("		<li><a href='address_detail.do?no="+addressList.get(i).
+		 * getNo()+"'>"+addressList.get(i).getNo()+" "+addressList.get(i).getName()
+		 * +" </a></li>"); }
+		 */
+		for(Address address:addressList) {
+			out.println("<li><a href='address_detail.do?no="+address.getNo()+"'>"
+					+ "["+address.getNo()+"]"+address.getName()+
+					"</a></li>");
 		}
 		out.println("	</ul>");
 		out.println("</div>");
 		out.println("</body>");
 		out.println("</html>");
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.sendRedirect("address_error.html");
+		}
 	}
 
 }

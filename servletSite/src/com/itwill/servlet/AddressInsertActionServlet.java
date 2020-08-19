@@ -30,52 +30,56 @@ public class AddressInsertActionServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*
+		 * 0. 요청객체 encoding 설정
 		 * 1.파라메타 바끼
 		 * 2.AddressService객체생성
-		 * 3.파라메타데이타로 Addess객체생성
+		 * 3.파라메타데이타로 Address객체생성
 		 * 4.AddressService.create()메쏘드실행
 		 * 5.adress_list.do로 redirection
 		 */
 		
-		AddressService addressService = new AddressService();
-		ArrayList<Address> addressList = new ArrayList<Address>();
-		int no = 0;
-		try {
-			addressList = addressService.selectAll();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		for (int i = 0; i < addressList.size(); i++) {
-			if (no==addressList.get(i).getNo()) {
-				no+=1;
-			}
-		}
-		
-		String id = request.getParameter("id");
-		String name = request.getParameter("name");
-		String phone = request.getParameter("phone");
-		String address = request.getParameter("address");
-		
-		
-		try {
-			addressService.create(new Address(no,id,name,phone,address));
-			response.sendRedirect("address_list.do");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		
 		/*
-		<input type="submit" value="주소록쓰기">
-		<input type="reset" value="주소록쓰기폼지우기">
-		<a href='address_insert_form.do'>[주소록쓰기폼]</a>
-		*/
+		 * try { AddressService addressService = new AddressService();
+		 * ArrayList<Address> addressList = new ArrayList<Address>(); int no = 0;
+		 * addressList = addressService.selectAll();
+		 * 
+		 * for (int i = 0; i < addressList.size(); i++) { if
+		 * (no==addressList.get(i).getNo()) { no+=1; } }
+		 * 
+		 * request.setCharacterEncoding("UTF-8"); String id =
+		 * request.getParameter("id"); String name = request.getParameter("name");
+		 * String phone = request.getParameter("phone"); String address =
+		 * request.getParameter("address");
+		 * 
+		 * addressService.create(new Address(no,id,name,phone,address));
+		 * response.sendRedirect("address_list.do");
+		 * 
+		 * } catch (Exception e) { e.printStackTrace();
+		 * response.sendRedirect("address_error.html"); }
+		 */
 		
-		
-		
-		
-		
-		
+		try {
+			/*
+			 * 0.요청객체 encoding설정
+			 * 1.파라메타 바끼
+			 * 2.AddressService객체생성
+			 * 3.파라메타데이타로 Address객체생성
+			 * 4.AddressService.create()메쏘드실행
+			 * 5.adress_list.do로 redirection
+			 */
+			request.setCharacterEncoding("UTF-8");
+			String id=request.getParameter("id");
+			String name=request.getParameter("name");
+			String phone=request.getParameter("phone");
+			String address=request.getParameter("address");
+			Address recvAddress=new Address(id, name, phone, address);
+			AddressService addressSevice=new AddressService();
+			int insertRowcount = addressSevice.create(recvAddress);
+			response.sendRedirect("address_list.do");
+		}catch (Exception e) {
+			e.printStackTrace();
+			response.sendRedirect("address_error.html");
+		}
 		
 		
 	}
