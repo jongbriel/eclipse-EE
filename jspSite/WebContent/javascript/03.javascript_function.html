@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function head_function(){
+		document.write("head_function()<br>");
+		return;
+	}
+	var name='global name';
+	var msg='global msg';
+	
+	function hello1(){
+		/*
+		local 변수
+		- 이렇게 펑션안에 안넣어주면 윈도우 소속이라 전역이 된다.
+		- 펑션 안이라도 var을 안써주면 윈도우에 들어가버린다!!
+		- 펑션이 실행되고 끝나면 사라진다.
+		*/
+		var name='GUEST';
+		var msg='안녕하세요!!!';
+		window.document.write(name+" 님 "+msg+"[hello1()]<br>")
+	}
+	
+	function hello2(msg){
+		/*
+		인자로 들어오는 변수는 var을 써주지 않는다!
+		로칼변수이기 때문에 이 스코프에만 속한다!
+		*/
+		var name='GUEST';
+		//인자값 없이 호출해도 에러값 안뜨고 그냥 undefined로 뜰뿐이다. 엄청 유연해!
+		if(msg==undefined){
+			msg='반갑다!!!!!!';
+		}
+		window.document.write(name+" 님 "+msg+"[hello2(msg)]<br>")
+		
+	}
+	
+	function hello3(name, msg){
+		window.document.write(name+" 님 "+msg+"[hello3(name, msg)]<br>")
+	}
+	
+	function hello4(name, msg, count){
+		document.write("i="+i+"<br>");
+		//i에 var 안하면 윈도우에 소속됨. 스코프 형성이 안됨! 주의!!
+		for (var i = 0; i < count; i++) {
+			window.document.write(name+" 님 "+msg+"[hello4(name, msg, count)]"+i+"<br>")
+		}
+		document.write("i="+i+"??????<br>");
+	}
+	
+	function add(a,b){
+		var r = a+b;
+		return r;
+	}
+	
+	function sub(a,b){
+		return a-b;
+	}
+	/*
+	function alert(msg){
+		document.write('내가만든 경고함수:'+msg+'<br>');
+	}
+	*/
+</script>
+</head>
+<body>
+<h1>자바스크립트 함수</h1><hr/>
+<div>펑션 자체도 객체다. 리턴, 인자 모두 사용가능</div>
+<script type="text/javascript">
+	window.head_function();
+	window.hello1();
+	window.hello2('너무 멋져용!');
+	window.hello2();
+	window.hello3('으앙','아악');
+	window.hello4('보라돌이','꺼졍', 10);
+	var r = window.add(34, 50);
+	document.write('add():'+r+"<br>");
+	var r = window.add("정","구지");
+	document.write('add():'+r+"<br>");
+	window.alert("경고다 꺼졍");
+	//body_end_function(); 스크립트는 아래로 가잖아. 그래서 펑션은 보통 대가리에서 선언함.
+	//window.alert="경고"; 
+	//window.alert(); 위에서 선언해놔서 펑션이 아니게 되어버렸다.
+	
+	//자바스크립트는 펑션 자체를 인자로 줄 수 있따.
+	window.div=function(a,b){
+		document.write('div:'+a/b);
+	};
+	div(1,2);
+</script>
+<script type="text/javascript">
+	function body_end_function(){
+		document.write("body_end_function()<br>");
+	}
+</script>
+</body>
+</html>

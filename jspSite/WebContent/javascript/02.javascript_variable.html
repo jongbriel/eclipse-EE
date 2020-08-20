@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	/*
+	변수선언
+		- var 키워드를 사용
+		- 타입을 가지지 않는다.
+		- 객체멤버변수(attribute, property), 멤버메써드(function)는 동적생성이 가능하다.
+		(위에 type 같은 애들도 속성이름이고 뒤에가 속성값이다. 즉 객체멤버변수다.)
+		- 돔트리는 윈도우 아래다.
+	*/
+	var no = 22;
+	var name = '신명숙';
+	var age = 43;
+	var weight = 56.56;
+	var married = true;
+	var address = null;
+	var etc;
+	married = 'married';
+	window.gender='남'
+		
+	
+</script>
+</head>
+<body>
+<h1>자바스크립트 변수선언</h1><hr/>
+<script type="text/javascript">
+	
+	console.log(window.no);
+	console.log(window.name);
+	console.log(window.age);
+	console.log(window.weight);
+	console.log(window.married);
+	console.log(window.address);
+	console.log(window.etc);
+	console.log(window.gender);
+	
+	window.document.write("<ul>")
+	window.document.write("<li>"+window.no+"</li>")
+	window.document.write("<li>"+window.name+"</li>")
+	window.document.write("<li>"+window.age+"</li>")
+	window.document.write("<li>"+window.weight+"</li>")
+	window.document.write("<li>"+window.married+"</li>")
+	window.document.write("</ul>")
+	//서버에서 다 내려받고 파싱하다가 스크립트보고 자바스크립트 엔진이 작업하는거임. 서버는 하는거 없음.
+	
+	window.alert('윈도우 alert 함수');
+	var result = window.confirm("진짜로 삭제할까요?");
+	console.log("result:"+result);
+	
+	
+	
+</script>
+
+</body>
+</html>
