@@ -84,8 +84,14 @@
 			</form> <br> <!-- button -->
 			<table border="0" cellpadding="0" cellspacing="1" width="590">
 				<tr>
-					<td align="right"><input type="button"
-						onclick="guestCreateForm();" value="방명록 쓰기" /></td>
+					<td align="right">
+					<input type="button"
+					    onclick="guestWriteForm();" value="방명록 쓰기" />
+					<!--  
+					<input type="button"
+					    onclick="location.href='guest_write_form.jsp';" value="방명록 쓰기" />
+					-->    
+					</td>
 				</tr>
 			</table></td>
 	</tr>

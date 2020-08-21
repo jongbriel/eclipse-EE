@@ -24,6 +24,19 @@ public class Guest {
 		this.guest_title = guest_title;
 		this.guest_content = guest_content;
 	}
+	
+	
+	public Guest(String guest_name, String guest_date, String guest_email, String guest_homepage, String guest_title,
+			String guest_content) {
+		super();
+		this.guest_name = guest_name;
+		this.guest_date = guest_date;
+		this.guest_email = guest_email;
+		this.guest_homepage = guest_homepage;
+		this.guest_title = guest_title;
+		this.guest_content = guest_content;
+	}
+	
 	public int getGuest_no() {
 		return guest_no;
 	}

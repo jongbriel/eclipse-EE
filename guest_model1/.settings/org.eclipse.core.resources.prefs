@@ -1,10 +1,2 @@
 eclipse.preferences.version=1
-encoding//WebContent/guest_list.jsp=UTF-8
-encoding//WebContent/guest_main.jsp=UTF-8
-encoding//WebContent/guest_modify_form.jsp=UTF-8
-encoding//WebContent/guest_view.jsp=UTF-8
-encoding//WebContent/guest_write_form.jsp=UTF-8
-encoding//WebContent/include_common_bottom.jspf=UTF-8
-encoding//WebContent/include_common_left.jsp=UTF-8
-encoding//WebContent/include_common_top.jsp=UTF-8
 encoding//src/04.guest.sql=UTF-8
