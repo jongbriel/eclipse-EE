@@ -12,8 +12,7 @@
 	/*
 		1.Cookie객체생성
 	*/
-	Cookie searchKeywordCookie=
-	 		new Cookie("searchKeyword",searchKeyword);
+	Cookie searchKeywordCookie=new Cookie("searchKeyword",searchKeyword);
 	Cookie ipCookie=new Cookie("ip",request.getRemoteAddr());
 	/*
 	    2.쿠키객체설정(setMaxAge)
