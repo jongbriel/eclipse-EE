@@ -69,13 +69,13 @@ public class GuestDaoImpl implements GuestDao{
 	public int updateGuest(Guest guest) throws Exception {
 		Connection con = ConnectionFactory.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(GuestSQL.GUEST_UPDATE);
+				
 		pstmt.setString(1, guest.getGuest_name());
-		pstmt.setString(2, guest.getGuest_date());
-		pstmt.setString(3, guest.getGuest_email());
-		pstmt.setString(4, guest.getGuest_homepage());
-		pstmt.setString(5, guest.getGuest_title());
-		pstmt.setString(6, guest.getGuest_content());
-		pstmt.setInt(7, guest.getGuest_no());
+		pstmt.setString(2, guest.getGuest_email());
+		pstmt.setString(3, guest.getGuest_homepage());
+		pstmt.setString(4, guest.getGuest_title());
+		pstmt.setString(5, guest.getGuest_content());
+		pstmt.setInt(6, guest.getGuest_no());
 		int updateRowCount=pstmt.executeUpdate();
 		pstmt.close();
 		ConnectionFactory.releaseConnection(con);

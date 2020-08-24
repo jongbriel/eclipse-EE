@@ -1,5 +1,8 @@
 package com.itwill.guest;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class GuestServiceTestMain {
 
 	public static void main(String[] args) throws Exception {
@@ -13,14 +16,18 @@ public class GuestServiceTestMain {
 		//System.out.println(d1);
 		
 		
-		Guest updateGuest = new Guest(85, "흐흐흐1", "2020/08/19", "dd@naver.com", "naver.com", "크앙", "하하하");
+		//Guest updateGuest = new Guest(85, "흐흐흐1", "2020/08/19", "dd@naver.com", "naver.com", "크앙", "하하하");
 		
 		
 		//int u1 = guestService.insertGuest(updateGuest);
-		int u2 = guestService.updateGuest(updateGuest);
+		//int u2 = guestService.updateGuest(updateGuest);
 		
 		
 		//int d1 = guestService.deleteGuest();
+		
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+		System.out.println(format.format(date));
 		
 	}
 
