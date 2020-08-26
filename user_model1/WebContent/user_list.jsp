@@ -1,13 +1,23 @@
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.itwill.user.UserService"%>
 <%@page import="com.itwill.user.User"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="login_check.jspf" %>
+<%
+	//errorPage="user_error.jsp" 요 페이지에서 에러나면 요 url로 포워딩 해줄래~?
+	//jsp에서 흐름제어에는 딱 2가지 포워딩과 리다이렉션 밖에 없다. 그리고 포워딩이 99프로다!!!
+	//포스트 방식으로 서버에 요청하는 유일한 방법은 form!!!
+	UserService userService = new UserService();
+	ArrayList<User> userList = userService.findUserList();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <title>사용자 관리</title>
-<meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel=stylesheet href="css/styles.css" type="text/css">
 <link rel=stylesheet href="css/user.css" type="text/css">
 <script type="text/javascript">
@@ -63,19 +73,23 @@ function userList() {
 										<td align=center bgcolor="E6ECDE">이름</td>
 										<td align=center bgcolor="E6ECDE">이메일</td>
 									</tr>
-									
+									<%for(User user:userList){
+										if(!user.getUserId().equals(sUserId)){
+									%>
 									<tr>
 										<td width=190 align=center bgcolor="ffffff" height="20">
-											userId
+											<%=user.getUserId()%>
 										</td>
 										<td width=200 bgcolor="ffffff" style="padding-left: 10">
-											<a href="user_view.jsp?userId=userId"
-											class="user">name</a>
+											<a href="user_view.jsp?userId=<%=user.getUserId()%>"
+											class="user"><%=user.getName()%></a>
 										</td>
-										<td width=200 align=center bgcolor="ffffff">email
+										<td width=200 align=center bgcolor="ffffff"><%=user.getEmail()%>
 										</td>
 									</tr>
-									
+									<%	}
+									}
+									%>
 									
 									
 								</table>

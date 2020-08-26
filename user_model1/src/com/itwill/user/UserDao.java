@@ -122,7 +122,6 @@ public class UserDao  {
 		}
 		return removeRowCount;
 		
-		
 	}
 	
 	/*
@@ -158,6 +157,7 @@ public class UserDao  {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		//아무것도 없을때 null이 반환되는걸 막기위해 빈값으로 일단 초기화함.
 		ArrayList<User> findUserList = new ArrayList<User>();
 		try {
 			con=dataSource.getConnection();
@@ -204,17 +204,4 @@ public class UserDao  {
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 

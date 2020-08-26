@@ -27,7 +27,7 @@
       <<요청시 JESSIONID쿠키존재할때>> 
          1.JESSIONID쿠키존재여부판단후 JESSIONID쿠키존재하면
            	JSESSIONID쿠키의 값(세션아이디)을 사용해서 서버에존재하는
-            HttpSession객체중에서  세션아이값과 일치하는 HttpSession객체반환(세션바인딩) 
+            HttpSession객체중에서  세션아이디값과 일치하는 HttpSession객체반환(세션바인딩) 
          2.HttpSession객체사용
 */            
 %>

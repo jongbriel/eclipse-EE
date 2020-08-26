@@ -4,7 +4,16 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
 	<display-name>user_model1</display-name>
-	
+	<!--
+	<error-page>
+		<error-code>404</error-code>
+		<location>/guest_error.jsp</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.NullPointerException</exception-type>
+		<location>/user_error.jsp</location>
+	</error-page>
+	  -->
 	<welcome-file-list>
 		<welcome-file>user_main.jsp</welcome-file>
 		<welcome-file>index.html</welcome-file>

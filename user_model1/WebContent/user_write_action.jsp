@@ -38,6 +38,12 @@
 		RequestDispatcher rd = request.getRequestDispatcher("user_write_form.jsp");
 		rd.forward(request, response);
 		
+		/*****************[정상응답]**********************/
+		//out.println("<script>");
+		//out.println("alert('"+e.getMessage()+"');");
+		//out.println("location.href='user_write_form.jsp';");
+		//out.println("</script>");
+		/********************************************/
 	}catch(Exception e){
 		e.printStackTrace();
 		response.sendRedirect("user_error.jsp");

@@ -28,11 +28,31 @@
 		RequestDispatcher rd = request.getRequestDispatcher("user_login_form.jsp");
 		rd.forward(request, response);
 		
+		/****************** case1[redirect] ******************/
+		//response.sendRedirect("user_login_form.jsp");
+		
+		/*****************case2[정상응답]**********************/
+		//out.println("<script>");
+		//out.println("alert('"+e.getMessage()+"');");
+		//out.println("location.href='user_login_form.jsp';");
+		//out.println("</script>");
+		/********************************************/
+		
+		
 	}catch(PasswordMismatchException e){
 		request.setAttribute("msg2", e.getMessage());
 		request.setAttribute("fuser", new User(userId,password,"",""));
 		RequestDispatcher rd = request.getRequestDispatcher("user_login_form.jsp");
 		rd.forward(request, response);
+		
+		/****************** case1[redirect] ******************/
+		//response.sendRedirect("user_login_form.jsp");
+		/*****************case2[정상응답]**********************/
+		//out.println("<script>");
+		//out.println("alert('"+e.getMessage()+"');");
+		//out.println("location.href='user_login_form.jsp';");
+		//out.println("</script>");
+		/********************************************/
 		
 	}catch(Exception e){
 		e.printStackTrace();
