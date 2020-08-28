@@ -10,8 +10,6 @@
 		return;
 	}
 
-	request.setCharacterEncoding("UTF-8");
-	
 	String userId = request.getParameter("userId");
 	String password = request.getParameter("password");
 	String name = request.getParameter("name");
@@ -33,6 +31,7 @@
 		*/
 		//자바로 포워드 하는 방법!!!
 		//스코프 객체
+		//복원할 데이터를 리퀘스트에 담아서 폼으로 다시 전송.(포워드)
 		request.setAttribute("fuser", newUser);
 		request.setAttribute("msg", e.getMessage());
 		RequestDispatcher rd = request.getRequestDispatcher("user_write_form.jsp");

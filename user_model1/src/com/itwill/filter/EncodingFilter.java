@@ -19,10 +19,11 @@ public class EncodingFilter implements Filter {
 		</init-param>
 	   </filter>
 	 */
+	//필터를 임플하고 init을 재정의
 	public void init(FilterConfig filterConfig) throws ServletException {
 		this.encoding = filterConfig.getInitParameter("encoding");
-		//System.out.println("생성직후 단한번호출 init(): encoding parameter-->"
-		//			+ encoding);
+		System.out.println("생성직후 단한번호출 init(): encoding parameter-->"
+					+ encoding);
 	}
 	
 
@@ -35,12 +36,13 @@ public class EncodingFilter implements Filter {
 		FilterChain chain)
 		throws IOException, ServletException {
 		//System.out.println("요청시마다 호출 doFilter()");
-
+		
 		if (request.getCharacterEncoding() == null) {
 			if (encoding != null) {
 				request.setCharacterEncoding(encoding);
 			}
 		}
+		//원래 요청하는 곳으로 리퀘랑 리폰 보내줌
 		chain.doFilter(request, response);
 	}
 	public void destroy() {

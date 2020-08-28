@@ -13,7 +13,6 @@
 	String userId = null;
 	String password = null;
 	try{
-		request.setCharacterEncoding("UTF-8");
 		userId=request.getParameter("userId");
 		password=request.getParameter("password");
 		UserService userService = new UserService();
@@ -22,7 +21,9 @@
 		session.setAttribute("sUserId", userId);
 		session.setAttribute("sUser", loginUser);
 		response.sendRedirect("user_main.jsp");
+		
 	}catch(UserNotFoundException e){
+		/****************** case3[forward] ******************/
 		request.setAttribute("msg1", e.getMessage());
 		request.setAttribute("fuser", new User(userId,password,"",""));
 		RequestDispatcher rd = request.getRequestDispatcher("user_login_form.jsp");
@@ -38,8 +39,8 @@
 		//out.println("</script>");
 		/********************************************/
 		
-		
 	}catch(PasswordMismatchException e){
+		/****************** case3[forward] ******************/
 		request.setAttribute("msg2", e.getMessage());
 		request.setAttribute("fuser", new User(userId,password,"",""));
 		RequestDispatcher rd = request.getRequestDispatcher("user_login_form.jsp");
