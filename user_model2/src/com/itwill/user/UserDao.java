@@ -148,7 +148,7 @@ public class UserDao {
 		
 		
 		
-		return false;
+		return isExist;
 		
 	}
 	
