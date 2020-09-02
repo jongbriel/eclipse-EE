@@ -1,2 +1,10 @@
 eclipse.preferences.version=1
 encoding//src/board_member.ddl=UTF-8
+encoding//src/board_member.erd=UTF-8
+encoding//src/board_member_insert.sql=UTF-8
+encoding//src/board_member_select.sql=UTF-8
+encoding//src/shop.ddl=UTF-8
+encoding//src/shop.erd=UTF-8
+encoding//src/shop_cart_insert.ddl=UTF-8
+encoding//src/shop_insert.ddl=UTF-8
+encoding//src/shop_select.sql=UTF-8

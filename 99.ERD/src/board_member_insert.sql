@@ -1,28 +1,28 @@
 INSERT INTO member (m_id, m_name, m_address, m_point, m_gender, m_date) VALUES 
-                   ('guard1', '±è°æÈ£1', '°æ±âµµ', 0, 'M', sysdate);
+                   ('guard1', 'ê¹€ê²½í˜¸1', 'ê²½ê¸°ë„', 0, 'M', sysdate);
 INSERT INTO member (m_id, m_name, m_address) VALUES 
-                   ('guard2', '±è°æÈ£2', '°æ±âµµ2');                   
+                   ('guard2', 'ê¹€ê²½í˜¸2', 'ê²½ê¸°ë„2');                   
 INSERT INTO member (m_id, m_name, m_address) VALUES 
-                   ('guard3', '±è°æÈ£3', '°æ±âµµ3');                   
+                   ('guard3', 'ê¹€ê²½í˜¸3', 'ê²½ê¸°ë„3');                   
 INSERT INTO member (m_id, m_name, m_address) VALUES 
-                   ('guard4', '±è°æÈ£4', '°æ±âµµ4');                   
+                   ('guard4', 'ê¹€ê²½í˜¸4', 'ê²½ê¸°ë„4');                   
 INSERT INTO member (m_id, m_name, m_address) VALUES 
-                   ('guard5', '±è°æÈ£5', '°æ±âµµ5');
+                   ('guard5', 'ê¹€ê²½í˜¸5', 'ê²½ê¸°ë„5');
                    
 INSERT INTO board (b_no, b_title, b_content, b_date, b_readcount, m_id) VALUES
-				  (1000, 'Å¸ÀÌÆ²1', '³»¿ë1', sysdate, 0, 'guard1');
+				  (1000, 'íƒ€ì´í‹€1', 'ë‚´ìš©1', sysdate, 0, 'guard1');
 INSERT INTO board (b_no, b_title, b_content, m_id) VALUES
-				  (2000, 'Å¸ÀÌÆ²2', '³»¿ë2', 'guard1');
+				  (2000, 'íƒ€ì´í‹€2', 'ë‚´ìš©2', 'guard1');
 INSERT INTO board (b_no, b_title, b_content, m_id) VALUES
-				  (3000, 'Å¸ÀÌÆ²3', '³»¿ë3', 'guard1');
+				  (3000, 'íƒ€ì´í‹€3', 'ë‚´ìš©3', 'guard1');
 				  
 INSERT INTO board (b_no, b_title, b_content, m_id) VALUES
-				  (4000, 'Å¸ÀÌÆ²4', '³»¿ë4', 'guard2');
+				  (4000, 'íƒ€ì´í‹€4', 'ë‚´ìš©4', 'guard2');
 INSERT INTO board (b_no, b_title, b_content, m_id) VALUES
-				  (5000, 'Å¸ÀÌÆ²5', '³»¿ë5', 'guard2');
+				  (5000, 'íƒ€ì´í‹€5', 'ë‚´ìš©5', 'guard2');
 				  
 INSERT INTO board (b_no, b_title, b_content, m_id) VALUES
-				  (6000, 'Å¸ÀÌÆ²6', '³»¿ë6', 'guard3');
+				  (6000, 'íƒ€ì´í‹€6', 'ë‚´ìš©6', 'guard3');
 				  
 commit;	  
 				  

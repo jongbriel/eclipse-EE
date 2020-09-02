@@ -1,7 +1,7 @@
---¸â¹ö°Ô½Ã±Û ¸ñ·Ï
+--ë©¤ë²„ê²Œì‹œê¸€ ëª©ë¡
 select m.m_id, m_name, b_no, b_title from member m left join board b on m.m_id=b.m_id;
 select m.m_id, m_name, b_no, b_title from member m join board b on m.m_id=b.m_id where m.m_id='guard1';
 
---°Ô½Ã±Û¾´»ç¶÷ Á¤º¸
+--ê²Œì‹œê¸€ì“´ì‚¬ëŒ ì •ë³´
 select * from board b join member m on b.m_id=m.m_id;
 select * from board b join member m on b.m_id=m.m_id where b_no=1000;
