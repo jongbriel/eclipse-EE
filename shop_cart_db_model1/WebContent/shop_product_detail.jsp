@@ -9,6 +9,7 @@
  		response.sendRedirect("shop_product_list.jsp");
  		return;
  	}
+ 	
  	Product product = null;
  	try{
  		ProductService productService=new ProductService();
