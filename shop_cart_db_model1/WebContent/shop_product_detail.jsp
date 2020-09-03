@@ -1,3 +1,25 @@
+<%@page import="com.itwill.shop.product.Product"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.itwill.shop.product.ProductService"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	String p_no=request.getParameter("p_no");
+ 	if(p_no==null || p_no.equals("")){
+ 		response.sendRedirect("shop_product_list.jsp");
+ 		return;
+ 	}
+ 	Product product = null;
+ 	try{
+ 		ProductService productService=new ProductService();
+ 		product = productService.getProduct(Integer.parseInt(p_no));
+ 	}catch(Exception e){
+ 		out.println("<script>");
+ 		out.println("location.href='shop_product_list.jsp';");
+ 		out.println("</script>");
+ 		return;
+ 	}
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -99,13 +121,13 @@
 										</form>
 									</td>
 									<td width=40% height=200 align=center><img border=0
-										src=image/bigle.gif width=120 height=200></td>
+										src=image/<%=product.getP_image()%> width=120 height=200></td>
 									<td width=30% height=200 class=t1>
 										<ol type="disc">
-											<li><b>견종 : 비글&nbsp;&nbsp;&nbsp;</b></li>
+											<li><b>견종 : <%=product.getP_name()%>&nbsp;&nbsp;&nbsp;</b></li>
 											<li><font color=#FF0000>가격 :
-													550000&nbsp;&nbsp;&nbsp;</font></li>
-											<li><font color=#0000FF>기타 상세 정보 등...&nbsp;&nbsp</font></li>
+													<%=product.getP_price()%>&nbsp;&nbsp;&nbsp;</font></li>
+											<li><font color=#0000FF><%=product.getP_desc()%>&nbsp;&nbsp;</font></li>
 										</ol>
 									</td>
 								</tr>

@@ -10,6 +10,12 @@ public class Product {
 		// TODO Auto-generated constructor stub
 	}
 	
+	@Override
+	public String toString() {
+		return "Product [p_no=" + p_no + ", p_name=" + p_name + ", p_price=" + p_price + ", p_image=" + p_image
+				+ ", p_desc=" + p_desc + ", p_click_count=" + p_click_count + "]";
+	}
+
 	public Product(int p_no, String p_name, int p_price, String p_image, String p_desc, int p_click_count) {
 		super();
 		this.p_no = p_no;

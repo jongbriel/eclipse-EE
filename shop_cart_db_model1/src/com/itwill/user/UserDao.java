@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import org.apache.tomcat.dbcp.dbcp2.ConnectionFactory;
 /*
  사용자관리에서 데이타베이스와의 작업을 전담하는 클래스
  USERINFO 테이블에 사용자를 추가,삭제,검색,수정등의 작업을한다.
@@ -17,8 +16,28 @@ public class UserDao  {
 	private DataSource dataSource;
 	
 	public UserDao() throws Exception {
+		//네이밍서비스 객체
 		InitialContext ic=new InitialContext();
+		//룩업해서 줘라 뒤에 ()이름으로 찾아서~ 그리고 커넥션
+		//()이름은 meta-inf 폴더 안의 xml
+		//톰캣뜰때 xml안의 이름으로 팩토리객체가 등록된다.
+		//xml 파일을 jndi 네임이라고 한다.
 		dataSource=(DataSource)ic.lookup("java:/comp/env/jdbc/OracleDB");
+		
+		/*
+		위는 톰캣에서 제공해주는 네이밍서비스 방법(lookup)을 사용한거임
+		Properties properties=new Properties();
+		properties.load(this.getClass().getResourceAsStream("db.properties"));
+		
+		BasicDataSource basicDataSource=new BasicDataSource();
+		basicDataSource.setDriverClassName(properties.getProperty("driverClass"));
+		basicDataSource.setUrl(properties.getProperty("url"));
+		basicDataSource.setUsername(properties.getProperty("user"));
+		basicDataSource.setPassword(properties.getProperty("password"));
+		dataSource = basicDataSource;
+		이거와 같음
+		 */
+				
 	}
 	/*
 	 * 사용자관리테이블에 새로운사용자생성
@@ -26,7 +45,7 @@ public class UserDao  {
 	public int create(User user) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String insertQuery = "insert into user1 values(?,?,?,?)";
+		String insertQuery = "insert into user2 values(?,?,?,?)";
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(insertQuery);
@@ -50,7 +69,7 @@ public class UserDao  {
 	public int update(User user) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String updateQuery = "update user1 set password=?,name=?,email=? where userid=?";
+		String updateQuery = "update user2 set password=?,name=?,email=? where userid=?";
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(updateQuery);
@@ -74,7 +93,7 @@ public class UserDao  {
 	public int remove(String userId) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String removeQuery = "delete from user1 where userid=?";
+		String removeQuery = "delete from user2 where userid=?";
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(removeQuery);
@@ -98,7 +117,7 @@ public class UserDao  {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String selectQuery = "select userid,password,name,email from user1 where userid=?";
+		String selectQuery = "select userid,password,name,email from user2 where userid=?";
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(selectQuery);
@@ -128,7 +147,7 @@ public class UserDao  {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String selectQuery = "select userid,password,name,email from user1";
+		String selectQuery = "select userid,password,name,email from user2";
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(selectQuery);
@@ -157,7 +176,7 @@ public class UserDao  {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		String existedQuery="select count(*) cnt from user1" +
+		String existedQuery="select count(*) cnt from user2" +
 							" where userid=?";
 		try{
 			con=dataSource.getConnection();

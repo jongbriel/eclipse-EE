@@ -8,14 +8,14 @@ form {
 	margin-right: 0px;
 	text-align: center;
 }
-A:link {
+a:link {
 	
 	color: #333333;
 	font-family: "돋움", "굴림";
 	font-size: 12px;
 	text-decoration: none;
 }
-A:visited {
+a:visited {
 	color: #333333;
 	font-family: "돋움", "굴림";
 	font-size: 12px;
@@ -31,22 +31,24 @@ A:hover {
 	color: #BEA12C;
 	font-family: "돋움", "굴림";
 	font-size: 12px;
+	/*
 	text-decoration: underline;
+	*/
 }
 
-A.user:link {
+a.user:link {
 	color: #333333;
 	font-family: "돋움", "굴림";
 	font-size: 12px;
 	text-decoration: underline;
 }
-A.user:visited {
+a.user:visited {
 	color: #333333;
 	font-family: "돋움", "굴림";
 	font-size: 12px;
 	text-decoration: underline;
 }
-A.user:active {
+a.user:active {
 	color: #333333;
 	font-family: "돋움", "굴림";
 	font-size: 12px;

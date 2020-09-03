@@ -1,5 +1,12 @@
-
-
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.itwill.shop.product.ProductService"%>
+<%@page import="com.itwill.shop.product.Product"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+	ProductService productService=new ProductService();
+	ArrayList<Product> productList=productService.getProductList();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -51,20 +58,39 @@
 		<!-- wrapper start -->
 		<div id="wrapper">
 			<!-- content start -->
+
 			<!-- include_content.jsp start-->
 			<div id="content">
-				<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-					codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0"
-					width="540px" height="350px">
-					<param name="movie" value="image/FI_main.swf">
-					<param name="play" value="true">
-					<param name="loop" value="true">
-					<param name="quality" value="high">
-					<embed src="image/FI_main.swf" scale="exactfit" play="true"
-						loop="true" quality="high" style="margin: 10px;"
-						pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
-						width="540px" height="350px"></embed>
-				</object>
+				<table border=0 cellpadding=0 cellspacing=0>
+					<tr>
+						<td><br />
+							<table style="padding-left: 10px" border=0 cellpadding=0
+								cellspacing=0>
+								<tr>
+									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>쇼핑몰 -
+											상품리스트</b></td>
+								</tr>
+							</table>
+
+							<form name="f" method="post">
+								<table width="100%" align="center" border="1" cellspacing="0"
+									cellpadding="3" bordercolordark="white"
+									bordercolorlight="#556b2f">
+									<tr>
+										<!--상품시작 --> 
+										<%for(Product product:productList){ %>
+										<td align="center" width="25%"><a
+											href="shop_product_detail.jsp?p_no=<%=product.getP_no()%>"><img
+												src="image/<%=product.getP_image()%>" border="0"></a><br /> <br />
+											<b>견종:<%=product.getP_name()%></b><br> <font color="#FF0000">가격:<%=product.getP_price()%>원
+										</font></td>
+										<%} %>
+										<!--상품 끝 -->
+									</tr>
+								</table>
+							</form> <br /></td>
+					</tr>
+				</table>
 			</div>
 			<!-- include_content.jsp end-->
 			<!-- content end -->
@@ -73,7 +99,7 @@
 		<div id="footer">
 			<!-- include_common_bottom.jsp start-->
 			
-	<p align="center">Copyright (&copy;) By Javabig2. All
+	<p align="center">Copyright (&copy;) By Java Class 5. All
 		rights reserved.</p>
 
 			<!-- include_common_bottom.jsp end-->

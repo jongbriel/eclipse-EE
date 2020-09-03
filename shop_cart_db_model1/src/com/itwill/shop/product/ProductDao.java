@@ -11,12 +11,10 @@ import javax.sql.DataSource;
 
 public class ProductDao {
 	private DataSource dataSource;
-
 	public ProductDao() throws Exception {
 		InitialContext ic = new InitialContext();
 		dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/OracleDB");
 	}
-
 	public ArrayList<Product> getProductList() throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -25,7 +23,7 @@ public class ProductDao {
 
 		try {
 			con = dataSource.getConnection();
-			String sql = "select * from product1";
+			String sql = "select * from product2";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			productList = new ArrayList<Product>();
@@ -58,7 +56,7 @@ public class ProductDao {
 
 		try {
 			con = dataSource.getConnection();
-			String sql = "select * from product1 where p_no=?";
+			String sql = "select * from product2 where p_no=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, p_no);
 			rs = pstmt.executeQuery();
@@ -88,7 +86,7 @@ public class ProductDao {
 
 		try {
 			con = dataSource.getConnection();
-			String sql = "update product1 set p_click_count = p_click_count+1 where p_no=?";
+			String sql = "update product2 set p_click_count = p_click_count+1 where p_no=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, p_no);
 			int count = pstmt.executeUpdate();

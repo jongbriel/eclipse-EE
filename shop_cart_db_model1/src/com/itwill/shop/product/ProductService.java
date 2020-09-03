@@ -21,15 +21,14 @@ public class ProductService {
 	 * DogProduct 1개반환
 	 */
 	public Product getProduct(int p_no) throws Exception {
-		
 		Product product = productDao.getProduct(p_no);
 		return product;
 	}
-
+	
 	public boolean updateReadcount(int p_no) throws Exception {
 		boolean result = false;
-		
 		result = productDao.updateReadcount(p_no);
 		return result;
 	}
+	
 }

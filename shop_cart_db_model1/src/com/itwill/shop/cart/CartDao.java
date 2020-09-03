@@ -107,13 +107,13 @@ public class CartDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		/*
-		select c.p_no,c.cart_qty,c.cart_tot_price ,p.p_name,p.p_price 
-		from cart1 c join user1 u 
-		on c.userid = u.userid join product1 p on c.p_no=p.p_no where u.userid='guard1';
+		select c.p_no,c.cart_qty,c.cart_tot_price ,p.p_name,p.p_image,p.p_price 
+		from cart2 c join user2 u 
+		on c.userid = u.userid join product2 p on c.p_no=p.p_no where u.userid='guard1';
 		 */
-		String selectQuery = "select c.cart_itemno,c.p_no,c.cart_qty,c.cart_tot_price ,p.p_name,p.p_price" + 
-							 " from cart1 c join user1 u " + 
-							 " on c.userid = u.userid join product1 p on c.p_no=p.p_no where u.userid=?";
+		String selectQuery = "select c.p_no,c.cart_qty,c.cart_tot_price ,p.p_name,p.p_image,p.p_price "+
+							 "from cart2 c join user2 u "+
+							 "on c.userid = u.userid join product2 p on c.p_no=p.p_no where u.userid=?";
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(selectQuery);
