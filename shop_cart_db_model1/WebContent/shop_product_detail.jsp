@@ -7,7 +7,7 @@
 	String p_no=request.getParameter("p_no");
  	if(p_no==null || p_no.equals("")){
  		response.sendRedirect("shop_product_list.jsp");
- 		return;
+ 		return; 
  	}
  	Product product = null;
  	try{
