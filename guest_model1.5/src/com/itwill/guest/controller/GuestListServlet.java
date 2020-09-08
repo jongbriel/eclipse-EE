@@ -26,10 +26,10 @@ public class GuestListServlet extends HttpServlet {
 			ArrayList<Guest> guestList=guestService.selectAll();
 			//이 request와 guest_list.jsp의 request는 같은 요청 범위다. 포워드잖아! 그래서 request에 담아 보낸다.
 			request.setAttribute("guestList", guestList);
-			forwardPath="forward:guest_list.jsp";
+			forwardPath="forward:/WEB-INF/views/guest_list.jsp";
 		}catch (Exception e) {
 			e.printStackTrace();
-			forwardPath="forward:guest_error.jsp";
+			forwardPath="forward:/WEB-INF/views/guest_error.jsp";
 		}
 		
 		//얘네들은 빼놔야해. 그래야 에러가 나면 에러.jsp로 포워드 하니깐!

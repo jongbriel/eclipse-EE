@@ -42,7 +42,7 @@
 					background="http://image.gmarket.co.kr/challenge/neo_image/customcenter_img2/popup_bottom01.gif"><table
 						width="50" border="0" cellspacing="0" cellpadding="0">
 						<tr>
-							<td><a href="#" onclick="history.back();"><img
+							<td><a href="guest_main.do" onclick="history.back();"><img
 									src="http://image.gmarket.co.kr/challenge/neo_image/customcenter_img2/b_close.gif"
 									width="47" height="18" border="0"></a></td>
 						</tr>

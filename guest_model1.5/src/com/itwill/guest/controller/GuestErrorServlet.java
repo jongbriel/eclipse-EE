@@ -16,13 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 public class GuestErrorServlet extends HttpServlet {
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String forwardPath="forward:guest_error.jsp";
-		//String forwardPath="redirect:guest_main.jsp";
+		String forwardPath="forward:/WEB-INF/views/guest_error.jsp";
 		
 		String [] pathArray = forwardPath.split(":");
 		String forwardOrRedirect=pathArray[0];
 		String path=pathArray[1];
-		
 		
 		if(forwardOrRedirect.equals("redirect")) {
 			response.sendRedirect(path);

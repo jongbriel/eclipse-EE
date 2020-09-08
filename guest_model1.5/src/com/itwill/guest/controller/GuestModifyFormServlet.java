@@ -30,10 +30,10 @@ public class GuestModifyFormServlet extends HttpServlet {
 				Guest guest=
 						guestService.selectByNo(Integer.parseInt(guest_noStr));
 				request.setAttribute("guest", guest);
-				forwardPath="forward:guest_modify_form.jsp";
+				forwardPath="forward:/WEB-INF/views/guest_modify_form.jsp";
 			}catch (Exception e) {
 				e.printStackTrace();
-				forwardPath="forward:guest_error.jsp";
+				forwardPath="forward:/WEB-INF/views/guest_error.jsp";
 			}
 		}
 		

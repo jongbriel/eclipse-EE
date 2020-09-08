@@ -30,7 +30,7 @@ public class GuestViewServlet extends HttpServlet {
 				GuestService guestService=new GuestService();
 				Guest guest=guestService.selectByNo(Integer.parseInt(guest_noStr));
 				request.setAttribute("guest", guest);
-				forwardPath="forward:guest_view.jsp";
+				forwardPath="forward:/WEB-INF/views/guest_view.jsp";
 				/*
 				if(guest==null){
 					out.println("<script>");
@@ -42,7 +42,7 @@ public class GuestViewServlet extends HttpServlet {
 				*/
 			}catch (Exception e) {
 				e.printStackTrace();
-				forwardPath="forward:guest_error.jsp";
+				forwardPath="forward:/WEB-INF/views/guest_error.jsp";
 			}
 		}
 		

@@ -41,7 +41,7 @@ public class GuestWriteActionServlet extends HttpServlet {
 				forwardPath="redirect:guest_list.do";
 			}catch(Exception e){
 				e.printStackTrace();
-				forwardPath="forward:guest_error.jsp";
+				forwardPath="forward:/WEB-INF/views/guest_error.jsp";
 			}
 		}
 		

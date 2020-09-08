@@ -18,7 +18,7 @@ import com.itwill.guest.GuestService;
 public class GuestRemoveActionServlet extends HttpServlet {
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String forwardPath="forward:guest_remove_action.jsp";
+		String forwardPath="";
 		
 		if(request.getMethod().equalsIgnoreCase("GET")){
 			forwardPath="redirect:guest_main.do";
@@ -30,7 +30,7 @@ public class GuestRemoveActionServlet extends HttpServlet {
 			    forwardPath="redirect:guest_list.do";
 		    }catch(Exception e){
 		    	e.printStackTrace();
-		    	forwardPath="forward:guest_error.do";
+		    	forwardPath="forward:/WEB-INF/views/guest_error.jsp";
 		    }
 		
 		}
