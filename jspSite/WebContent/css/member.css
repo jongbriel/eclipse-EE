@@ -1,25 +1,32 @@
-@CHARSET "EUC-KR";
+@CHARSET "UTF-8";
 /*
+멤버에 적용되는 CSS
+*/
+	/*
 	class selector
+		- 이름앞에 . 을 기술한다.
 	*/
-.TXTFLD {
-	border-width: 1px;
-	border-color: blue;
-	border-style: solid;
-	color: blue;
-}
-
-.TXTFLD1 {
-	border-width: 1px;
-	border-color: red;
-	border-style: dotted;
-	color: red;
-}
-
-/*
+	.TXTFLD{
+		border-width: 1px;
+		border-color: blue;
+		color: blue;
+		border-style: dotted;
+		border-radius: 10px;
+	}
+	.TXTFLD1{
+		border-width: 1px;
+		border-color: red;
+		color: red;
+		border-style: dotted;
+		border-radius: 10px;
+	}
+	/*
 	id selector
+		- 이름앞에 #을 기술
+		- id와 일치하는 tag에 적용
 	*/
-#jointbl {
-	background-color: orange;
-	border: 2px solid red;
-}
+	#jointbl{
+		background-color: orange;
+		border: 2px dashed red;
+	}
+

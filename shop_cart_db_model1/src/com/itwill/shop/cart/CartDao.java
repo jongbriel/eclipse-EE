@@ -23,7 +23,7 @@ public class CartDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		boolean isExist=false;
-		String selectQuery = "select count(*) as p_count from cart1 c join user1 u on c.userid = u.userid join product1 p on c.p_no=p.p_no where u.userid=? and c.p_no=?";
+		String selectQuery = "select count(*) as p_count from cart2 c join user2 u on c.userid = u.userid join product2 p on c.p_no=p.p_no where u.userid=? and c.p_no=?";
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(selectQuery);
@@ -62,7 +62,7 @@ public class CartDao {
 		
 			Connection con = null;
 			PreparedStatement pstmt = null;
-			String insertQuery = "INSERT INTO cart1(cart_itemno, userId, p_no, cart_qty, cart_tot_price) VALUES (cart1_cart_itemno_SEQ.nextval, ?, ?, ?, ?)";
+			String insertQuery = "INSERT INTO cart2(cart_itemno, userId, p_no, cart_qty, cart_tot_price) VALUES (cart2_cart_itemno_SEQ.nextval, ?, ?, ?, ?)";
 			try {
 				con = dataSource.getConnection();
 				pstmt = con.prepareStatement(insertQuery);
@@ -82,7 +82,7 @@ public class CartDao {
 	public  int update(String sUserId,Product product,int cart_qty) throws Exception {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String updateQuery = "update cart1 set cart_qty = cart_qty + ?,cart_tot_price = (cart_qty + ?) * ?  where userid=? and p_no=?";
+		String updateQuery = "update cart2 set cart_qty = cart_qty + ?,cart_tot_price = (cart_qty + ?) * ?  where userid=? and p_no=?";
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(updateQuery);
@@ -111,7 +111,7 @@ public class CartDao {
 		from cart2 c join user2 u 
 		on c.userid = u.userid join product2 p on c.p_no=p.p_no where u.userid='guard1';
 		 */
-		String selectQuery = "select c.p_no,c.cart_qty,c.cart_tot_price ,p.p_name,p.p_image,p.p_price "+
+		String selectQuery = "select c.cart_itemno,c.p_no,c.cart_qty,c.cart_tot_price ,p.p_name,p.p_image,p.p_price "+
 							 "from cart2 c join user2 u "+
 							 "on c.userid = u.userid join product2 p on c.p_no=p.p_no where u.userid=?";
 		try {
@@ -125,6 +125,7 @@ public class CartDao {
 						sUserId,
 						rs.getInt("p_no"),
 						rs.getString("p_name"),
+						rs.getString("p_image"),
 						rs.getInt("cart_qty"),
 						rs.getInt("cart_tot_price")
 						));
@@ -145,7 +146,7 @@ public class CartDao {
 	public  int deleteCartItem(int cart_itemno)  throws Exception{
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String removeQuery = "delete from cart1 where cart_itemno = ?";
+		String removeQuery = "delete from cart2 where cart_itemno = ?";
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(removeQuery);
@@ -163,7 +164,7 @@ public class CartDao {
 	public  int deleteCart(String sUserId)  throws Exception{
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		String removeQuery = "delete from cart1 where userid=?";
+		String removeQuery = "delete from cart2 where userid=?";
 		try {
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(removeQuery);

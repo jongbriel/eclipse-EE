@@ -22,15 +22,15 @@
 </head>
 <body>
 <h1>SCOPE객체2</h1>
-
+<hr>
 <ol>
-	<li>page:<%=pageContext.getAttribute("pageSt")%></li>
-	<li>request:<%=request.getAttribute("requestSt")%></li>
-	<li>session:<%=session.getAttribute("sessionSt")%></li>
-	<li>application:<%=application.getAttribute("applicationSt")%></li>
+	<li>page:<%=pageContext.getAttribute("pageStudent")%></li>
+	<li>request:<%=request.getAttribute("requestStudent")%></li>
+	<li>session:<%=session.getAttribute("sessionStudent")%></li>
+	<li>application:<%=application.getAttribute("applicationStudent")%></li>
 </ol> 
 <br/>
-<a href='8-1.default_scope.jsp'>8-1.default_scope.jsp</a><br/>
+<a href='8-1.default_scope_page_session_application1.jsp'>8-1.default_scope_page_session_application1.jsp</a><br/>
 
 </body>
 </html>

@@ -1,0 +1,17 @@
+@charset "UTF-8";
+/*
+모든페이지에 공통으로 적용되는 CSS
+*/
+	/*
+	tag(html) selector
+	*/
+	body{
+		background-color: #4f58b0;
+		color:white;
+	}
+	form{
+		color:purple;
+	}
+	h3{
+		color: maroon;
+	}

@@ -22,13 +22,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>SCOPE request媛�泥�</h1>
-
+<h1>SCOPE request객체</h1>
+<hr>
 <ol>
-	<li>page:<%=pageContext.getAttribute("pageSt")%></li>
-	<li>request:<%=request.getAttribute("requestSt")%></li>
-	<li>session:<%=session.getAttribute("sessionSt")%></li>
-	<li>application:<%=application.getAttribute("applicationSt")%></li>
+	<li>page:<%=pageContext.getAttribute("pageStudent")%></li>
+	<li>request:<%=request.getAttribute("requestStudent")%></li>
+	<li>session:<%=session.getAttribute("sessionStudent")%></li>
+	<li>application:<%=application.getAttribute("applicationStudent")%></li>
 </ol> 
 <br/>
 

@@ -5,7 +5,57 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원 가입</title>
+<link rel="stylesheet" type="text/css" href="css/common.css">
+<link rel="stylesheet" type="text/css" href="css/member.css">
+<style type="text/css">
+	/*
+	tag(html) selector
+	*/
+	/*
+	body{
+		background-color: aqua;
+		color:white;
+	}
+	form{
+		color:purple;
+	}
+	h3{
+		color: maroon;
+	}
+	*/
+	/*
+	class selector
+		- 이름앞에 . 을 기술한다.
+	*/
+	/*
+	.TXTFLD{
+		border-width: 1px;
+		border-color: blue;
+		color: blue;
+		border-style: dotted;
+		border-radius: 10px;
+	}
+	.TXTFLD1{
+		border-width: 1px;
+		border-color: red;
+		color: red;
+		border-style: dotted;
+		border-radius: 10px;
+	}
+	*/
+	/*
+	id selector
+		- 이름앞에 #을 기술
+		- id와 일치하는 tag에 적용
+	*/
+	/*
+	#jointbl{
+		background-color: orange;
+		border: 2px dashed red;
+	}
+	*/
 
+</style>
 
 </head>
 <body>

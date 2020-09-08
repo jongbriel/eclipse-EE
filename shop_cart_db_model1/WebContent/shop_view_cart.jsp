@@ -1,3 +1,14 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="com.itwill.shop.cart.CartItemDto"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.itwill.shop.cart.CartService"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@include file="login_check.jspf" %>
+<%
+	CartService cartService=new CartService();
+	ArrayList<CartItemDto> cartItemList=cartService.getCartItemList(sUserId);
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -27,33 +38,14 @@
 		<!-- header start -->
 		<div id="header">
 			<!-- include_common_top.jsp start-->
-			
-<h1>
-	<a href="">WEB SAMPLE SITE</a>
-</h1>
-
+			<jsp:include page="include_common_top.jsp"/>	
 			<!-- include_common_top.jsp end-->
 		</div>
 		<!-- header end -->
 		<!-- navigation start-->
 		<div id="navigation">
 			<!-- include_common_left.jsp start-->
-			
-
-<p>
-	<strong>메 뉴</strong>
-</p>
-<ul>
-	
-	
-		<li><a href="user_view.jsp">guard1님</a>&nbsp;<a href="user_logout_action.jsp">로그아웃</a></li>
-		<li><a href="shop_product_list.jsp">쇼핑몰</a></li>
-		<li><a href="shop_view_cart.jsp">장바구니</a></li>
-	
-		<li><a href="board_list.jsp">게시판리스트</a></li>
-		<li><a href="board_write.jsp">게시판쓰기</a></li>
-</ul>
-
+			<jsp:include page="include_common_left.jsp"/>	
 			<!-- include_common_left.jsp end-->
 		</div>
 		<!-- navigation end-->
@@ -73,7 +65,10 @@
 											장바구니 보기</b></td>
 								</tr>
 							</table> <!--form-->
+							<!-- 폼안에 폼을 절대 겹쳐쓰지말지어다!!!
 							<form name="f" method="post">
+							-->
+							<div id='f'>
 								<table align=center border=1 width=80% cellspacing=0
 									bordercolordark=#FFFFFF bordercolorlight=#4682b4>
 									<tr>
@@ -88,49 +83,45 @@
 										<td width=50 height=25 bgcolor=#4682b4 align=center class=t1><font
 											color=#FFFFFF>비 고</font></td>
 									</tr>
-									
+									<%
+									DecimalFormat df=new DecimalFormat("#,##0");
+									int totPrice=0;
+									for(CartItemDto cartItem:cartItemList){
+										totPrice+=cartItem.getCart_tot_price();
+									%>
 									<!-- cart item start -->
 									<tr>
-										<td width=40 height=26 align=center class=t1><img src='image/dalma.gif' width="40" height="28"/></td>
-										<td width=250 height=26 align=center class=t1><a href='shop_product_detail.jsp?p_no=2'>달마시안</a></td>
-										<td width=112 height=26 align=center class=t1>2</td>
-										<td width=166 height=26 align=center class=t1>1,000,000</td>
-										<td width=50 height=26 align=center class=t1><a
-											href="shop_delete_item_cart.jsp?cart_item_no=1" class=m1>삭제</a></td>
+										<td width=40 height=26 align=center class=t1><img src='image/<%=cartItem.getP_image()%>' width="40" height="28"/></td>
+										<td width=250 height=26 align=center class=t1><a href='shop_product_detail.jsp?p_no=<%=cartItem.getP_no()%>'><%=cartItem.getP_name()%></a></td>
+										<td width=112 height=26 align=center class=t1><%=cartItem.getCart_qty()%></td>
+										<td width=166 height=26 align=center class=t1><%=df.format(cartItem.getCart_tot_price())%></td>
+										<td width=50 height=26 align=center class=t1>
+											<form action="shop_delete_item_cart.jsp" method="post">
+												<input type="hidden" name="cart_itemno" value=<%=cartItem.getCart_item_no()%>>
+												<input type="submit" value="삭제">
+											</form>
+										</td>
 									</tr>
-									
 									<!-- cart item end -->
-									
-									<!-- cart item start-->
-									<tr>
-										<td width=40 height=26 align=center class=t1><img src='image/bigle.gif' width="40" height="28"/></td>
-										<td width=250 height=26 align=center class=t1><a href='shop_product_detail.jsp?p_no=1'>비글</a></td>
-										<td width=112 height=26 align=center class=t1>3</td>
-										<td width=166 height=26 align=center class=t1>1,650,000</td>
-										<td width=50 height=26 align=center class=t1><a
-											href="shop_delete_item_cart.jsp?cart_item_no=2" class=m1>삭제</a></td>
-									</tr>
-									
-									<!-- cart item end -->
-									
-
+									<%}%>
 									<tr>
 										<td width=640 colspan=5 height=26 class=t1>
 											<p align=right>
-												<font color=#FF0000>총 금액 : 2,650,000 원
+												<font color=#FF0000>총 금액 : <%=df.format(totPrice)%> 원
 												</font>
 											</p>
 										</td>
 									</tr>
 								</table>
-							</form> <br />
+							<!--</form>-->
+							</div>
+							<br />
 							<table border="0" cellpadding="0" cellspacing="1" width="590">
 								<tr>
 									<td align=center>&nbsp;&nbsp;<a href=shop_delete_cart.jsp
 										class=m1>장바구니 비우기</a>&nbsp;&nbsp;<a href=shop_product_list.jsp
 										class=m1>계속 구경하기</a> &nbsp;&nbsp;<a href="javascript:buy();"
 										class=m1>구매하기</a>
-
 									</td>
 								</tr>
 							</table></td>
@@ -143,10 +134,7 @@
 		<!--wrapper end-->
 		<div id="footer">
 			<!-- include_common_bottom.jsp start-->
-			
-	<p align="center">Copyright (&copy;) By Java Class 5. All
-		rights reserved.</p>
-
+			<jsp:include page="include_common_bottom.jsp"/>	
 			<!-- include_common_bottom.jsp end-->
 		</div>
 	</div>

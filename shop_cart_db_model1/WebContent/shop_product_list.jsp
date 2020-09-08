@@ -1,12 +1,13 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="com.itwill.shop.product.Product"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.itwill.shop.product.ProductService"%>
-<%@page import="com.itwill.shop.product.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	ProductService productService=new ProductService();
 	ArrayList<Product> productList=productService.getProductList();
-%>
+%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -24,34 +25,14 @@
 		<!-- header start -->
 		<div id="header">
 			<!-- include_common_top.jsp start-->
-			
-<h1>
-	<a href="">WEB SAMPLE SITE</a>
-</h1>
-
+			<jsp:include page="include_common_top.jsp"/>		
 			<!-- include_common_top.jsp end-->
 		</div>
 		<!-- header end -->
 		<!-- navigation start-->
 		<div id="navigation">
 			<!-- include_common_left.jsp start-->
-			
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<p>
-	<strong>메 뉴</strong>
-</p>
-<ul>
-	
-	
-		<li><a href="user_write_form.jsp">회원가입</a></li>
-		<li><a href="user_login_form.jsp">로그인</a></li>
-		<li><a href="shop_product_list.jsp">쇼핑몰</a></li>
-		<li><a></a></li>
-	
-		<li><a href="board_list.jsp">게시판리스트</a></li>
-		<li><a href="board_write.jsp">게시판쓰기</a></li>
-</ul>
-
+			<jsp:include page="include_common_left.jsp"/>	
 			<!-- include_common_left.jsp end-->
 		</div>
 		<!-- navigation end-->
@@ -77,15 +58,22 @@
 									cellpadding="3" bordercolordark="white"
 									bordercolorlight="#556b2f">
 									<tr>
+										<%
+										DecimalFormat decimalFormat=new DecimalFormat();
+										decimalFormat.applyPattern("#,##0");
+										for(Product product:productList){
+										%>
 										<!--상품시작 --> 
-										<%for(Product product:productList){ %>
 										<td align="center" width="25%"><a
 											href="shop_product_detail.jsp?p_no=<%=product.getP_no()%>"><img
 												src="image/<%=product.getP_image()%>" border="0"></a><br /> <br />
-											<b>견종:<%=product.getP_name()%></b><br> <font color="#FF0000">가격:<%=product.getP_price()%>원
+											<b>견종:<%=product.getP_name()%></b><br>
+											<font color="#FF0000">가격:<%=decimalFormat.format(product.getP_price())%>원
 										</font></td>
-										<%} %>
 										<!--상품 끝 -->
+										<%}%>			
+										
+										
 									</tr>
 								</table>
 							</form> <br /></td>
@@ -98,10 +86,7 @@
 		<!--wrapper end-->
 		<div id="footer">
 			<!-- include_common_bottom.jsp start-->
-			
-	<p align="center">Copyright (&copy;) By Java Class 5. All
-		rights reserved.</p>
-
+			<jsp:include page="include_common_bottom.jsp"/>	
 			<!-- include_common_bottom.jsp end-->
 		</div>
 	</div>

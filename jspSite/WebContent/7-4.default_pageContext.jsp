@@ -8,6 +8,9 @@
 </head>
 <body>
 <h1>기본객체 pageContext[PageContext]</h1>
+<p>
+	JSP page에 대한 정보를 가지고 있는 객체(JSP페이지의 기본객체 참조)
+</p>
 <hr/>
 <ol>
 	<li><%=pageContext.getRequest()%></li>
@@ -15,6 +18,7 @@
 	<li><%=pageContext.getSession()%></li>
 	<li><%=pageContext.getServletContext()%></li>
 	<li><%=pageContext.getServletConfig()%></li>
+	<li><%=pageContext.getOut()%></li>
 </ol>
 </body>
 </html>

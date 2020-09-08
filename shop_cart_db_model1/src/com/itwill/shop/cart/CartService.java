@@ -14,7 +14,6 @@ public class CartService {
 	}
 	
 	public synchronized int add(String sUserId,int p_no, int cart_qty) throws Exception{
-		
 		Product product=productDao.getProduct(p_no);
 		if(cartDao.isProductExist(sUserId, p_no)) {
 			return cartDao.update(sUserId, product, cart_qty);

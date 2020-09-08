@@ -3,8 +3,11 @@ package com.itwill.shop.cart;
 public class CartItemDto {
 	private int cart_item_no;
 	private String userId;
+	/****************Product**************/
 	private int p_no;
 	private String p_name;
+	private String p_image;
+	/*************************************/
 	private int cart_qty;
 	private int cart_tot_price;
 
@@ -12,12 +15,14 @@ public class CartItemDto {
 
 	}
 
-	public CartItemDto(int cart_item_no, String userId, int p_no, String p_name, int cart_qty, int cart_tot_price) {
+	public CartItemDto(int cart_item_no, String userId, int p_no, String p_name, String p_image, int cart_qty,
+			int cart_tot_price) {
 		super();
 		this.cart_item_no = cart_item_no;
 		this.userId = userId;
 		this.p_no = p_no;
 		this.p_name = p_name;
+		this.p_image = p_image;
 		this.cart_qty = cart_qty;
 		this.cart_tot_price = cart_tot_price;
 	}
@@ -68,6 +73,14 @@ public class CartItemDto {
 
 	public void setCart_tot_price(int cart_tot_price) {
 		this.cart_tot_price = cart_tot_price;
+	}
+
+	public String getP_image() {
+		return p_image;
+	}
+
+	public void setP_image(String p_image) {
+		this.p_image = p_image;
 	}
 
 	
