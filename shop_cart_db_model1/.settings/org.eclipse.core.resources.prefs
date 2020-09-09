@@ -2,3 +2,7 @@ eclipse.preferences.version=1
 encoding//WebContent/SQL/shop.ddl=UTF-8
 encoding//WebContent/SQL/shop.erd=UTF-8
 encoding//WebContent/SQL/shop_insert.sql=UTF-8
+encoding//WebContent/SQL/shop_select_update_delete.sql=UTF-8
+encoding//WebContent/test/test_jumun_detail.jsp=UTF-8
+encoding//WebContent/test/test_jumun_list.jsp=UTF-8
+encoding//WebContent/test/test_product_list.jsp=UTF-8

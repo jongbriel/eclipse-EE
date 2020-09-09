@@ -1,5 +1,18 @@
+<%@page import="com.itwill.shop.jumun.JumunDetail"%>
+<%@page import="com.itwill.shop.jumun.Jumun"%>
+<%@page import="com.itwill.shop.jumun.JumunService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="login_check.jspf" %>        
+<%
+	String j_noStr=request.getParameter("j_no");
+	if(j_noStr==null||j_noStr.equals("")){
+		response.sendRedirect("shop_jumun_list.jsp");
+		return;
+	}	
+	JumunService jumunService=new JumunService();
+    Jumun jumun=jumunService.detail(sUserId, Integer.parseInt(j_noStr));
+%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -50,8 +63,9 @@ form > table tr td{
 											주문상세조회</b></td>
 								</tr>
 							</table> <!--form-->
-							<form name="f" method="post">
-							
+							<form name="f" method="post" action="shop_jumun_delete_action.jsp">
+								<input type="hidden" name="j_no" value="<%=jumun.getJ_no()%>">
+								
 							    <table align=center width=80% cellspacing=0
 									bordercolordark=#FFFFFF bordercolorlight=#4682b4>
 									<caption style="text-align: left;">주문상세정보</caption>
@@ -68,10 +82,12 @@ form > table tr td{
 									
 									
 									<tr>
-										<td width=290 height=26 align=center class=t1>5001</td>
-										<td width=112 height=26 align=center class=t1>2020-09-04</td>
-										<td width=166 height=26 align=center class=t1>김경호</td>
-										<td width=50 height=26 align=center class=t1>삭제</td>
+										<td width=290 height=26 align=center class=t1><%=jumun.getJ_no()%></td>
+										<td width=112 height=26 align=center class=t1><%=jumun.getJ_date()%></td>
+										<td width=166 height=26 align=center class=t1><%=jumun.getUserId()%></td>
+										<td width=50 height=26 align=center class=t1>
+												<input type="submit" value="삭제">
+										</td>
 									</tr>
 								</table>
 									
@@ -91,28 +107,23 @@ form > table tr td{
 									</tr>
 									
 									<!-- cart item start -->
+									<%for(JumunDetail jumunDetail:jumun.getJumunDetailList()){ %>
 									<tr>
-										<td width=290 height=26 align=center class=t1><a href='shop_product_detail.jsp?p_no=2'>달마시안</a></td>
-										<td width=112 height=26 align=center class=t1>2</td>
-										<td width=166 height=26 align=center class=t1>1,000,000</td>
+										<td width=290 height=26 align=center class=t1><a href='shop_product_detail.jsp?p_no=<%=jumunDetail.getP_no()%>'><%=jumunDetail.getJd_pname()%></a></td>
+										<td width=112 height=26 align=center class=t1><%=jumunDetail.getJd_qty()%></td>
+										<td width=166 height=26 align=center class=t1><%=jumunDetail.getJd_tot_price()%></td>
 										<td width=50 height=26 align=center class=t1></td>
 									</tr>
+									<%}%>
 									<!-- cart item end -->
 									
-									<!-- cart item start -->
-									<tr>
-										<td width=290 height=26 align=center class=t1><a href='shop_product_detail.jsp?p_no=1'>비글</a></td>
-										<td width=112 height=26 align=center class=t1>3</td>
-										<td width=166 height=26 align=center class=t1>1,650,000</td>
-										<td width=50 height=26 align=center class=t1></td>
-									</tr>
-									<!-- cart item end -->
+									
 									
 
 									<tr>
 										<td width=640 colspan=4 height=26 class=t1>
 											<p align=right>
-												<font color=#FF0000>총 주문 금액 : 2,650,000 원
+												<font color=#FF0000>총 주문 금액 : <%=jumun.getJ_price()%> 원
 												</font>
 											</p>
 										</td>

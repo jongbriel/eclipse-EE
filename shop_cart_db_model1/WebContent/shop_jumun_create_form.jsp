@@ -1,3 +1,49 @@
+<%@page import="com.itwill.user.UserService"%>
+<%@page import="com.itwill.shop.product.Product"%>
+<%@page import="com.itwill.shop.product.ProductService"%>
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="com.itwill.shop.cart.CartItemDto"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.itwill.shop.cart.CartService"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@include file="login_check.jspf" %> 
+<%
+	if(request.getMethod().equalsIgnoreCase("GET")){
+		response.sendRedirect("shop_jumun_list.jsp");
+		return;
+	}
+
+	String buyType=request.getParameter("buyType");
+	String p_noStr=request.getParameter("p_no");    
+	String p_qtyStr=request.getParameter("p_qty");   
+	if(buyType==null||buyType.equals("")){
+		response.sendRedirect("shop_jumun_list.jsp");
+		return;
+	}	
+	if(p_qtyStr==null)p_qtyStr="1";
+	
+	CartService cartService=new CartService();
+	ProductService productService=new ProductService();
+	UserService userService=new UserService();
+	User loginUser=	userService.findUser(sUserId);
+	
+	ArrayList<CartItemDto> cartItemList=new ArrayList<CartItemDto>();
+	if(buyType.equals("cart")){
+		cartItemList = cartService.getCartItemList(sUserId);
+	}else if(buyType.equals("direct")){
+		Product product=productService.getProduct(Integer.parseInt(p_noStr));
+		CartItemDto cartItemDto=
+				new CartItemDto(9999,
+						       sUserId,
+						       product.getP_no(),
+						       product.getP_name(),
+						       product.getP_image(),
+						       Integer.parseInt(p_qtyStr),
+						       product.getP_price()*Integer.parseInt(p_qtyStr));
+		cartItemList.add(cartItemDto);
+	}
+%>   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,7 +57,11 @@ form > table tr td{
 }
 </style>
 <script type="text/javascript">
-	
+      function jumun_create_form_submit(){
+    	  document.jumun_create_form.method='POST';
+    	  document.jumun_create_form.action='shop_jumun_create_action.jsp';
+    	  document.jumun_create_form.submit();
+      }
 </script>
 </head>
 <body bgcolor=#FFFFFF text=#000000 leftmargin=0 topmargin=0
@@ -21,33 +71,14 @@ form > table tr td{
 		<!-- header start -->
 		<div id="header">
 			<!-- include_common_top.jsp start-->
-			
-<h1>
-	<a href="">WEB SAMPLE SITE</a>
-</h1>
-
+			<jsp:include page="include_common_top.jsp"/>
 			<!-- include_common_top.jsp end-->
 		</div>
 		<!-- header end -->
 		<!-- navigation start-->
 		<div id="navigation">
 			<!-- include_common_left.jsp start-->
-			
-
-<p>
-	<strong>메 뉴</strong>
-</p>
-<ul>
-	
-	
-		<li><a href="user_view.jsp">guard1님</a>&nbsp;<a href="user_logout_action.jsp">로그아웃</a></li>
-		<li><a href="shop_product_list.jsp">쇼핑몰</a></li>
-		<li><a href="shop_view_cart.jsp">장바구니</a></li>
-	
-		<li><a href="board_list.jsp">게시판리스트</a></li>
-		<li><a href="board_write.jsp">게시판쓰기</a></li>
-</ul>
-
+			<jsp:include page="include_common_left.jsp"/>
 			<!-- include_common_left.jsp end-->
 		</div>
 		<!-- navigation end-->
@@ -64,11 +95,13 @@ form > table tr td{
 								cellspacing=0>
 								<tr>
 									<td bgcolor="f4f4f4" height="22">&nbsp;&nbsp;<b>쇼핑몰 -
-											주문/결제</b></td>
+											주문/결제폼</b></td>
 								</tr>
 							</table> <!--form-->
-							<form name="f" method="post">
-							
+							<form name="jumun_create_form" method="post">
+								<input type="hidden" name="buyType" value="<%=buyType%>">
+								<input type="hidden" name="p_no" value="<%=p_noStr%>">
+								<input type="hidden" name="p_qty" value="<%=p_qtyStr%>">
 							    <table align=center width=80% cellspacing=0
 									bordercolordark=#FFFFFF bordercolorlight=#4682b4>
 									<caption style="text-align: left;">구매자정보</caption>
@@ -85,9 +118,9 @@ form > table tr td{
 									
 									
 									<tr>
-										<td width=290 height=26 align=center class=t1>guard1</td>
-										<td width=112 height=26 align=center class=t1>김경호</td>
-										<td width=166 height=26 align=center class=t1>guard1@gmail.com</td>
+										<td width=290 height=26 align=center class=t1><%=loginUser.getUserId()%></td>
+										<td width=112 height=26 align=center class=t1><%=loginUser.getName()%></td>
+										<td width=166 height=26 align=center class=t1><%=loginUser.getEmail()%></td>
 										<td width=50 height=26 align=center class=t1></td>
 									</tr>
 								</table>
@@ -109,28 +142,25 @@ form > table tr td{
 									</tr>
 									
 									<!-- cart item start -->
+									<%
+									int totPrice=0;
+									DecimalFormat df=new DecimalFormat("#,##0");
+									for(CartItemDto cartItem:cartItemList){
+										totPrice+=cartItem.getCart_tot_price();
+									%>
 									<tr>
-										<td width=290 height=26 align=center class=t1><a href='shop_product_detail.jsp?p_no=2'>달마시안</a></td>
-										<td width=112 height=26 align=center class=t1>2</td>
-										<td width=166 height=26 align=center class=t1>1,000,000</td>
+										<td width=290 height=26 align=center class=t1><a href='shop_product_detail.jsp?p_no=2'><%=cartItem.getP_name()%></a></td>
+										<td width=112 height=26 align=center class=t1><%=cartItem.getCart_qty() %></td>
+										<td width=166 height=26 align=center class=t1><%=df.format(cartItem.getCart_tot_price())%></td>
 										<td width=50 height=26 align=center class=t1></td>
 									</tr>
 									<!-- cart item end -->
-									
+									<%}%>
 									<!-- cart item start -->
-									<tr>
-										<td width=290 height=26 align=center class=t1><a href='shop_product_detail.jsp?p_no=1'>비글</a></td>
-										<td width=112 height=26 align=center class=t1>3</td>
-										<td width=166 height=26 align=center class=t1>1,650,000</td>
-										<td width=50 height=26 align=center class=t1></td>
-									</tr>
-									<!-- cart item end -->
-									
-
 									<tr>
 										<td width=640 colspan=4 height=26 class=t1>
 											<p align=right>
-												<font color=#FF0000>총 주문 금액 : 2,650,000 원
+												<font color=#FF0000>총 주문 금액 : <%=df.format(totPrice) %> 원
 												</font>
 											</p>
 										</td>
@@ -139,7 +169,8 @@ form > table tr td{
 							</form> <br />
 							<table border="0" cellpadding="0" cellspacing="1" width="590">
 								<tr>
-									<td align=center> &nbsp;&nbsp;<a href="shop_jumun_create_action.jsp"
+									<td align=center> &nbsp;&nbsp;
+									<a href="javascript:jumun_create_form_submit();"
 										class=m1>구매/결재하기</a>
 										&nbsp;&nbsp;<a href=shop_product_list.jsp
 										class=m1>계속 쇼핑하기</a>
@@ -156,10 +187,7 @@ form > table tr td{
 		<!--wrapper end-->
 		<div id="footer">
 			<!-- include_common_bottom.jsp start-->
-			
-	<p align="center">Copyright (&copy;) By Java Class 5. All
-		rights reserved.</p>
-
+			<jsp:include page="include_common_bottom.jsp"/>
 			<!-- include_common_bottom.jsp end-->
 		</div>
 	</div>

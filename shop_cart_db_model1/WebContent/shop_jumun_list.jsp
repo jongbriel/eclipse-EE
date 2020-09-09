@@ -1,5 +1,14 @@
+<%@page import="com.itwill.shop.jumun.Jumun"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.itwill.shop.jumun.JumunService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="login_check.jspf" %>    
+<%
+	JumunService jumunService=new JumunService();
+    ArrayList<Jumun> jumunList =jumunService.list(sUserId);
+    
+%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -62,27 +71,19 @@
 										<td width=80 height=25 bgcolor=#4682b4 align=center class=t1><font
 											color=#FFFFFF></font></td>
 									</tr>
-									
+									<%for(Jumun jumun:jumunList){ %>
 									<!-- jumun item start -->
 									<tr>
-										<td width=145 height=26 align=center class=t1>5001</td>
-										<td width=145 height=26 align=center class=t1>달마외2종</td>
-										<td width=112 height=26 align=center class=t1>2020-09-01</td>
-										<td width=136 height=26 align=center class=t1>1,000,000</td>
+										<td width=145 height=26 align=center class=t1><%=jumun.getJ_no()%></td>
+										<td width=145 height=26 align=center class=t1><%=jumun.getJ_desc()%></td>
+										<td width=112 height=26 align=center class=t1><%=jumun.getJ_date()%></td>
+										<td width=136 height=26 align=center class=t1><%=jumun.getJ_price()%></td>
 										<td width=80 height=26 align=center class=t1><a
-											href="shop_jumun_detail.jsp?jumun_no=5001" class=m1>주문상세</a></td>
+											href="shop_jumun_detail.jsp?j_no=<%=jumun.getJ_no()%>" class=m1>주문상세</a></td>
 									</tr>
 									<!-- jumun item end -->
-									<!-- jumun item start-->
-										<tr>
-										<td width=145 height=26 align=center class=t1>5002</td>
-										<td width=145 height=26 align=center class=t1>비글</td>
-										<td width=112 height=26 align=center class=t1>2020-09-02</td>
-										<td width=136 height=26 align=center class=t1>500,000</td>
-										<td width=80 height=26 align=center class=t1><a
-											href="shop_jumun_detail.jsp?jumun_no=5002" class=m1>주문상세</a></td>
-									</tr>
-									<!-- jumun item end -->
+									<%} %>
+									
 								</table>
 							</form> <br />
 							<table border="0" cellpadding="0" cellspacing="1" width="590">
@@ -102,7 +103,7 @@
 		<!--wrapper end-->
 		<div id="footer">
 			<!-- include_common_bottom.jsp start-->
-			<jsp:include page="include_common_left.jsp"/>
+			<jsp:include page="include_common_bottom.jsp"/>
 			<!-- include_common_bottom.jsp end-->
 		</div>
 	</div>

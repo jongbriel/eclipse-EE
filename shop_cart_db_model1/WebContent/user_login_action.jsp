@@ -19,6 +19,7 @@
 		session.setAttribute("sUserId", userId);
 		session.setAttribute("sUser", loginUser);
 		response.sendRedirect("user_main.jsp");
+		
 	}catch(UserNotFoundException e){
 		/*********************case3[forward]****************/
 		request.setAttribute("msg1", e.getMessage());

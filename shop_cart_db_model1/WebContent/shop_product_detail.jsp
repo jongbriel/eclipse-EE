@@ -3,6 +3,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	boolean isLogin=false;
+	if(session.getAttribute("sUserId")!=null){
+		isLogin=true;
+	}
+	
 	String p_noStr=request.getParameter("p_no");
 	if(p_noStr==null || p_noStr.equals("")){
 		response.sendRedirect("shop_product_list.jsp");
@@ -28,12 +33,14 @@
 <style type="text/css" media="screen">
 </style>
 <script type="text/javascript">
-	function buy() {
-		if (true) {
+	function jumun_create_form() {
+		if (<%=!isLogin%>) {
 			alert('로그인 하세요');
-			location.href = 'user_login.jsp';
+			location.href = 'user_login_form.jsp';
 		} else {
-			location.href = 'shop_buy.jsp';
+			document.buyFrm.method='POST';
+			document.buyFrm.action='shop_jumun_create_form.jsp';
+			document.buyFrm.submit();
 		}
 	}
 	function productList() {
@@ -116,10 +123,16 @@
 							<!-- 
 							</form>
 							-->
+							<form name="buyFrm">
+								<input type="hidden" name="p_no" value="<%=product.getP_no()%>">
+								<input type="hidden" name="p_qty" value="1">
+								<input type="hidden" name="buyType" value="direct">
+							</form>
+							
 							<table border="0" cellpadding="0" cellspacing="1">
 								<tr>
 									<td align=center><input type="button" value="구매"
-										onClick="buy()"> &nbsp; <input type="button"
+										onClick="jumun_create_form();"> &nbsp; <input type="button"
 										value="계속쇼핑" onClick="productList();"></td>
 								</tr>
 							</table></td>
