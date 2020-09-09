@@ -23,6 +23,10 @@ public class JumunService {
 	 * 주문삭제
 	 */
 	public int delete(int j_no) throws Exception {
+		/*
+		delete from jumun_detail2 where j_no=1;
+		delete from jumun2 where j_no=1;
+		 */
 		int rowcount1=jumunDetailDao.delete(j_no);
 		int rowcount2=jumunDao.delete(j_no);
 		return rowcount2;

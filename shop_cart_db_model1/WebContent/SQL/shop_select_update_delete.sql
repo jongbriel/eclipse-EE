@@ -49,8 +49,8 @@ on jd.p_no=p.p_no
 where j.userid='guard1' and j.j_no=1;
 
 -- 4. 주문한개의 내역삭제
-delete from jumun_detail2 where j_no=6;
-delete from jumun2 where j_no=6;
+delete from jumun_detail2 where j_no=1;
+delete from jumun2 where j_no=1;
 
 
 commit;
