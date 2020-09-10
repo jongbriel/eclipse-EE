@@ -1,4 +1,4 @@
-package com.itwill.guest.controller;
+package com.itwill.summer;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ import com.itwill.guest.GuestService;
 		/guest_error.do
 */
 
-public class DispatcherServlet extends HttpServlet {
+public class DispatcherServlet1 extends HttpServlet {
 	
 	public void init(ServletConfig config) throws ServletException {
 		
@@ -69,9 +69,10 @@ public class DispatcherServlet extends HttpServlet {
 		//System.out.println("command"+command);
 		
 		/*
-		 * 2.클라이언트의 요청에 따른 업무실행(XXService)
+		 * 2.클라이언트의 요청에 따른 업무실행(XXService),forwardPath
 		 */
 		String forwardPath="";
+		/*############################################################################*/
 		if (command.equals("/guest_main.do")) {
 			forwardPath="forward:/WEB-INF/views/guest_main.jsp";
 			
@@ -83,7 +84,6 @@ public class DispatcherServlet extends HttpServlet {
 				forwardPath="redirect:guest_write_form.do";
 			}else {
 				try{
-					request.setCharacterEncoding("UTF-8");
 					String guest_name=request.getParameter("guest_name");
 					String guest_email=request.getParameter("guest_email");
 					String guest_homepage=request.getParameter("guest_homepage");
@@ -163,7 +163,6 @@ public class DispatcherServlet extends HttpServlet {
 				forwardPath="redirect:guest_main.do";
 			}else {
 				try{
-					request.setCharacterEncoding("UTF-8");
 					String guest_noStr=request.getParameter("guest_no");
 					String guest_name=request.getParameter("guest_name");
 					String guest_email=request.getParameter("guest_email");
@@ -178,6 +177,8 @@ public class DispatcherServlet extends HttpServlet {
 											guest_email,guest_homepage,
 											guest_title,guest_content));
 					forwardPath="redirect:guest_view.do?guest_no="+guest_noStr;
+					//포워드이기에 같은 리퀘스트라 "guest_no" 파라메타가 들어있다.
+					//forwardPath="forward:guest_view.do";
 				}catch(Exception e){
 					e.printStackTrace();
 					forwardPath="forward:/WEB-INF/views/guest_error.jsp";
@@ -204,6 +205,7 @@ public class DispatcherServlet extends HttpServlet {
 		}else {
 			forwardPath="forward:/WEB-INF/views/guest_error.jsp";
 		}
+		/*############################################################################*/
 		
 		/*
 		 * 3. JSP forward or redirect

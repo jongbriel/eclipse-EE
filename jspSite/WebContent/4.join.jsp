@@ -24,7 +24,7 @@ JSP주석
 	3. 클라이언트 응답
  -->
  <%
-	request.setCharacterEncoding("UTF-8");
+	//request.setCharacterEncoding("UTF-8");
 	String id=request.getParameter("id");
 	String name=request.getParameter("name");
 	String pass=request.getParameter("pass");
