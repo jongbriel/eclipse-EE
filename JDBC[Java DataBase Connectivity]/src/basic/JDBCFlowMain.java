@@ -12,8 +12,8 @@ public class JDBCFlowMain {
 		
 		String driverClass="oracle.jdbc.OracleDriver";
 		String url="jdbc:oracle:thin:@182.237.126.19:1521:XE";
-		String user="javapython31";
-		String password="javapython31";
+		String user="javapython9";
+		String password="javapython9";
 		
 		/**************설정파일로부터 DB접속정보얻기*************
 		Properties dbProperties=new Properties();

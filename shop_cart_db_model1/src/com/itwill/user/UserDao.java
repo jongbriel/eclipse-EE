@@ -36,7 +36,7 @@ public class UserDao  {
 		basicDataSource.setPassword(properties.getProperty("password"));
 		dataSource = basicDataSource;
 		이거와 같음
-		 */
+		*/
 				
 	}
 	/*

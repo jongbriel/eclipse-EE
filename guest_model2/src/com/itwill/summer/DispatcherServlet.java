@@ -1,7 +1,12 @@
 package com.itwill.summer;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Properties;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -11,16 +16,82 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.itwill.guest.controller.GuestErrorController;
 import com.itwill.guest.controller.GuestListController;
 import com.itwill.guest.controller.GuestMainController;
+import com.itwill.guest.controller.GuestModifyActionController;
+import com.itwill.guest.controller.GuestModifyFormController;
+import com.itwill.guest.controller.GuestRemoveActionController;
 import com.itwill.guest.controller.GuestViewController;
+import com.itwill.guest.controller.GuestWriteActionController;
 import com.itwill.guest.controller.GuestWriteFormController;
 
 
 public class DispatcherServlet extends HttpServlet {
 	
+	public DispatcherServlet() {
+		System.out.println("0.DispatcherServlet객체생성자호출");
+	}
+	
+	/*
+	 * Controller객체들을 저장하는 맵
+	 */
+	private HashMap<String, Controller> controllerMap;
+	
 	public void init(ServletConfig config) throws ServletException {
+		//load-on-start 옵션을 줬기때문에 서버만 켜져도 바로 로딩됨
+		super.init(config);
+		System.out.println("1.DispatcherServlet객체 init() 호출");
+		controllerMap=new HashMap<String, Controller>();
+		/*
+		 * web.xml에설정된 파라메타값가져오기
+		 * <servlet>
+				<servlet-name>controller</servlet-name>
+				<servlet-class>com.itwill.summer.DispatcherServlet</servlet-class>
+				<init-param>
+					<param-name>configFile</param-name>
+					<param-value>/WEB-INF/guest_controller_mapping.properties</param-value>
+				</init-param>
+			</servlet>
+		 */
+		String confileFile=config.getInitParameter("configFile");
+		String configFileRealPath=this.getServletContext().getRealPath(confileFile);
+		try {
+			FileInputStream pIn=new FileInputStream(configFileRealPath);
+			//Properties는 map의 자식이다. 그래서 스트링 타입의 키와 벨류를 가진다.
+			Properties controllerMappingProperties=new Properties();
+			controllerMappingProperties.load(pIn);
+			Set commandKeySet=controllerMappingProperties.keySet();
+			Iterator commandIterator=commandKeySet.iterator();
+			System.out.println("-------------------------------------------------------------");
+			//이터레이터를 돌릴 수 있는 단 한가지 방법은 while
+			while (commandIterator.hasNext()) {
+				String command=(String)commandIterator.next();
+				String controllerClassName=controllerMappingProperties.getProperty(command);
+				//guest에 의존하지 않고(지칭하지 않고) 클래스 생성
+				Class controllerClass=Class.forName(controllerClassName);
+				//기본생성자 생성
+				Controller controllerObject=(Controller)controllerClass.newInstance();
+				System.out.println(command+"--->"+controllerClassName);
+				///guest_write_form.do--->com.itwill.guest.controller.GuestWriteFormController
+				controllerMap.put(command, controllerObject);
+			}
+			System.out.println("-------------------------------------------------------------");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
+		/*
+		controllerMap.put("/guest_main.do", new GuestMainController());
+		controllerMap.put("/guest_list.do", new GuestListController());
+		controllerMap.put("/guest_view.do", new GuestViewController());
+		controllerMap.put("/guest_write_form.do", new GuestWriteFormController());
+		controllerMap.put("/guest_modify_form.do", new GuestModifyFormController());
+		controllerMap.put("/guest_write_action.do", new GuestWriteActionController());
+		controllerMap.put("/guest_modify_action.do", new GuestModifyActionController());
+		controllerMap.put("/guest_remove_action.do", new GuestRemoveActionController());
+		controllerMap.put("/guest_error.do", new GuestErrorController());
+		*/
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		this.processRequest(request, response);
@@ -42,116 +113,11 @@ public class DispatcherServlet extends HttpServlet {
 		/*
 		 * 2.클라이언트의 요청에 따른 업무실행(XXService),forwardPath
 		 */
-		/*############################################################################*/
 		/** 요청커맨드 하나당 하나의 객체를 만드는 방식!!! (Command Pattern) **/
 		String forwardPath="";
-		Controller controller=null;
-		if (command.equals("/guest_main.do")) {
-			controller=new GuestMainController();
-		}else if (command.equals("/guest_list.do")) {
-			controller=new GuestListController();
-		}else if (command.equals("/guest_view.do")) {
-			controller=new GuestViewController();
-		}else if (command.equals("/guest_write_form.do")) {
-			controller=new GuestWriteFormController();
-		}else if (command.equals("/guest_modify_form.do")) {
-			//controller=new GuestModifyFormController();
-			/*
-			if(request.getMethod().equalsIgnoreCase("GET")){
-				forwardPath="redirect:guest_main.do";
-			}else {
-				try {
-					String guest_noStr = request.getParameter("guest_no");
-					GuestService guestService=new GuestService();
-					Guest guest=
-							guestService.selectByNo(Integer.parseInt(guest_noStr));
-					request.setAttribute("guest", guest);
-					forwardPath="forward:/WEB-INF/views/guest_modify_form.jsp";
-				}catch (Exception e) {
-					e.printStackTrace();
-					forwardPath="forward:/WEB-INF/views/guest_error.jsp";
-				}
-			}
-			*/
-		}else if (command.equals("/guest_write_action.do")) {
-			//controller=new GuestWriteActionController();
-			/*
-			if(request.getMethod().equalsIgnoreCase("GET")){
-				forwardPath="redirect:guest_write_form.do";
-			}else {
-				try{
-					String guest_name=request.getParameter("guest_name");
-					String guest_email=request.getParameter("guest_email");
-					String guest_homepage=request.getParameter("guest_homepage");
-					String guest_title=request.getParameter("guest_title");
-					String guest_content=request.getParameter("guest_content");
-					Guest guest=
-							new Guest(-999,guest_name,
-									  null,guest_email,
-									  guest_homepage,guest_title,
-									  guest_content);
-					GuestService guestService=new GuestService();
-					int insertRowCount=guestService.insertGuest(guest);
-					forwardPath="redirect:guest_list.do";
-				}catch(Exception e){
-					e.printStackTrace();
-					forwardPath="forward:/WEB-INF/views/guest_error.jsp";
-				}
-			}
-			*/
-		}else if (command.equals("/guest_modify_action.do")) {
-			//controller=new GuestModifyActionController();
-			/*
-			if(request.getMethod().equalsIgnoreCase("GET")){
-				forwardPath="redirect:guest_main.do";
-			}else {
-				try{
-					String guest_noStr=request.getParameter("guest_no");
-					String guest_name=request.getParameter("guest_name");
-					String guest_email=request.getParameter("guest_email");
-					String guest_homepage=request.getParameter("guest_homepage");
-					String guest_title=request.getParameter("guest_title");
-					String guest_content=request.getParameter("guest_content");
-					GuestService guestService=new GuestService();
-					int updateRowCount=
-							guestService.updateGuest(
-										new Guest(Integer.parseInt(guest_noStr),
-											guest_name,null,
-											guest_email,guest_homepage,
-											guest_title,guest_content));
-					forwardPath="redirect:guest_view.do?guest_no="+guest_noStr;
-					//포워드이기에 같은 리퀘스트라 "guest_no" 파라메타가 들어있다.
-					//forwardPath="forward:guest_view.do";
-				}catch(Exception e){
-					e.printStackTrace();
-					forwardPath="forward:/WEB-INF/views/guest_error.jsp";
-				}
-			}
-			*/
-		}else if (command.equals("/guest_remove_action.do")) {
-			//controller=new GuestRemoveActionController();
-			/*
-			if(request.getMethod().equalsIgnoreCase("GET")){
-				forwardPath="redirect:guest_main.do";
-			}else {
-			    try{
-				    String guest_noStr = request.getParameter("guest_no");
-				    GuestService guestService=new GuestService();
-				    guestService.deleteGuest(Integer.parseInt(guest_noStr));
-				    forwardPath="redirect:guest_list.do";
-			    }catch(Exception e){
-			    	e.printStackTrace();
-			    	forwardPath="forward:/WEB-INF/views/guest_error.jsp";
-			    }
-			}
-			*/		
-		}else {
-			//controller=new GuestErrorController();
-			//forwardPath="forward:/WEB-INF/views/guest_error.jsp";
-		}
-		/*############################################################################*/
-		//이제 if문에서는 컨트롤러 자식객체만 만들어준다. 그 객체가 만들어지면 메써드 실행하고 반환.
+		Controller controller=controllerMap.get(command);
 		forwardPath=controller.handleRequest(request, response);
+		//이제 if문에서는 컨트롤러 자식객체만 만들어준다. 그 객체가 만들어지면 메써드 실행하고 반환.
 		
 		/*
 		 * 3. JSP forward or redirect
