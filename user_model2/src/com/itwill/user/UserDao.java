@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -19,14 +20,24 @@ public class UserDao {
 	 * Connection을 반환해주는객체
 	 */
 	private DataSource dataSource;
+	
 	/*
+	<< JNDI (Java Naming and Directory Interface API)>>
+	- Directory Service에서 제공하는 데이터 객체를 발견하고 참고(lookup) 하기 위한 JAVA API.(외부객체를 가져오기위한기술)
+	- Application은 JNDI를 사용하여 Server의 Resource(다른 시스템과의 연결을 제공하는 객체)를 찾을 수 있다.
+	- Resource를 Server에 등록할 때 고유한 JNDI를 부여한다. 보통 사용자에게 친숙한 directory 경로 형태이며, 
+		예를 들면 JDBC 자원에 대한 JNDI 이름은 "jdbc/testdb" 형식으로 지어진다.
+	- Tomcat와 같은 WAS를 보면 특정 폴더에 필요한 데이터 소스(라이브러리)를 사용하기위해 JNDI를 이용하여 가져온다.
+	 */
 	public UserDao() throws Exception {
 		InitialContext ic = new InitialContext();
 		dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/OracleDB");
 		System.out.println("UserDao()생성자:" + this + "-->" + dataSource);
 	}
-	*/
-	  public UserDao() throws Exception { 
+	/*
+	이걸 안쓰면 db.properties도 필요없다.
+	위에서 META-INF에 context.xml을 쓴다.
+	public UserDao() throws Exception { 
 		  Properties properties=new Properties();
 		  properties.load(this.getClass().getResourceAsStream("db.properties"));
 		  BasicDataSource basicDataSource = new BasicDataSource();
@@ -36,7 +47,7 @@ public class UserDao {
 		  basicDataSource.setPassword(properties.getProperty("password")); 
 		  dataSource = basicDataSource; 
 	  }
-	  
+	  */
 	 
 	/*
 	 * 사용자관리테이블에 새로운사용자생성
