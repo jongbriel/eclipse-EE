@@ -73,7 +73,6 @@ public class JumunService {
 				jumunDetail.setJd_tot_price(cartItemDto.getCart_tot_price());
 				jumunDetailDao.create(sUserId, jumunDetail);
 			}
-			
 			cartDao.deleteCart(sUserId);
 	}
 	/*

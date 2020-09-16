@@ -46,15 +46,8 @@ public class JumunDao {
 	 */
 	public int create(String sUserId,Jumun jumun) throws Exception{
 		/*
-		 	INSERT INTO jumun1 (jumun_no, jumun_desc, jumun_date, jumun_price, user_id) 
-			VALUES (3001, '아이폰외 4종', sysdate , 345100, 'guard1');
-			
-			INSERT INTO jumun_detail1 (jumun_detail_no, jumun_no, product_no,jumun_detail_count) 
-			VALUES (5001, 3001, 1001,2);
-			INSERT INTO jumun_detail1 (jumun_detail_no, jumun_no, product_no,jumun_detail_count) 
-			VALUES (5002, 3001, 1002,2);
-			INSERT INTO jumun_detail1 (jumun_detail_no, jumun_no, product_no,jumun_detail_count) 
-			VALUES (5003, 3001, 1003,1);
+		INSERT INTO jumun2 (j_no, j_desc, j_date, j_price, userId) 
+		VALUES (jumun2_j_no_SEQ.nextval, '비글외2종', sysdate, 1600000, 'guard1');
 		 */
 		Connection con = null;
 		PreparedStatement pstmt1 = null;

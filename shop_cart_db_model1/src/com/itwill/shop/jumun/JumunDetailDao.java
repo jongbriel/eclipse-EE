@@ -45,6 +45,15 @@ public class JumunDetailDao {
 	 * 주문상세생성
 	 */
 	public int create(String sUserId,JumunDetail jumunDetail) throws Exception{
+		/*
+		INSERT INTO jumun_detail2 (jd_no, jd_qty, jd_pname, jd_tot_price, j_no, p_no) 
+		VALUES (jumun_detail2_jd_no_SEQ.nextval, 2, '비글', 1100000, jumun2_j_no_SEQ.currval, 1);
+
+		INSERT INTO jumun_detail2 (jd_no, jd_qty, jd_pname, jd_tot_price, j_no, p_no) 
+		VALUES (jumun_detail2_jd_no_SEQ.nextval, 1, '달마시안', 500000, jumun2_j_no_SEQ.currval,2);
+		 */
+		
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String jumunInsertQuery = "INSERT INTO jumun_detail2 (jd_no, jd_qty, jd_pname, jd_tot_price, j_no, p_no) "
