@@ -1,20 +1,13 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.itwill.user.UserService"%>
 <%@page import="com.itwill.user.User"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page language="java"
 		contentType="text/html; charset=UTF-8"
         pageEncoding="UTF-8"
         %>
-<%--@page language="java"
-		contentType="text/html; charset=UTF-8"
-        pageEncoding="UTF-8"
-        errorPage="user_error.jsp"
-        --%>
 <%@ include file="login_check.jspf" %>  
 <%
-	UserService userService=new UserService();
-	ArrayList<User> userList=userService.findUserList();
+	ArrayList<User> userList=(ArrayList<User>)request.getAttribute("userList");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -25,7 +18,7 @@
 <link rel=stylesheet href="css/user.css" type="text/css">
 <script type="text/javascript">
 	function userList() {
-			f.action = "user_write_form.jsp";
+			f.action = "user_write_form.do";
 			f.submit();
 	}
 </script>

@@ -38,6 +38,7 @@ public class DispatcherServlet extends HttpServlet {
 	 */
 	private HashMap<String, Controller> controllerMap;
 	
+		
 	public void init(ServletConfig config) throws ServletException {
 		//load-on-start 옵션을 줬기때문에 서버만 켜져도 바로 로딩됨
 		super.init(config);
@@ -54,6 +55,10 @@ public class DispatcherServlet extends HttpServlet {
 				</init-param>
 			</servlet>
 		 */
+		//config가 위의 web.xml에서 이름과 패스등을 읽어온다.
+		//프라퍼티도 맵이다. 맵에 들어가는 키와 밸류는 둘다 String 타입으로 들어간다.
+		//이걸 가지고 controllerMap에 스트링키값, 컨트롤러객체로(참조값) 값을 넣는다.
+		//init에서 이런 작업을 하기에 미리 다 만들어놓고 요청을 받는거지.
 		String confileFile=config.getInitParameter("configFile");
 		String configFileRealPath=this.getServletContext().getRealPath(confileFile);
 		try {
@@ -116,6 +121,7 @@ public class DispatcherServlet extends HttpServlet {
 		/** 요청커맨드 하나당 하나의 객체를 만드는 방식!!! (Command Pattern) **/
 		String forwardPath="";
 		Controller controller=controllerMap.get(command);
+		//컨트롤러를 호출해서 forward:/WEB-INF/views/~~~.jsp 같은 패쓰를 반환받는다.
 		forwardPath=controller.handleRequest(request, response);
 		//이제 if문에서는 컨트롤러 자식객체만 만들어준다. 그 객체가 만들어지면 메써드 실행하고 반환.
 		
@@ -129,10 +135,13 @@ public class DispatcherServlet extends HttpServlet {
 		if(forwardOrRedirect.equals("redirect")) {
 			response.sendRedirect(path);
 		}else {
+			//반환받은 패쓰로 jsp로 포워딩한다.
 			RequestDispatcher rd=request.getRequestDispatcher(path);
 			rd.forward(request, response);
 		}
-		
+		//구조와 흐름(플로우)이 모두 정의된 걸 프레임워크라 한다.
+		//맵핑만 해주면 내 플로우로 그걸 실행시켜주겠다.
+		//그래서 우리는 핸들리퀘스트만 코딩해주는거
 	}
 	
 }

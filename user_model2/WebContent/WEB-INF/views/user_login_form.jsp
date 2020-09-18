@@ -19,7 +19,7 @@
 <link rel=stylesheet href="css/user.css" type="text/css">
 <script type="text/javascript">
 	function userCreate() {
-		f.action = "user_write_form.jsp";
+		f.action = "user_write_form.do";
 		f.submit();
 	}
 
@@ -34,8 +34,7 @@
 			f.password.focus();
 			return false;
 		}
-
-		f.action = "user_login_action.jsp";
+		f.action = "user_login_action.do";
 		f.submit();
 	}
 </script>

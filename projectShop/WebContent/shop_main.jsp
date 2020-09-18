@@ -33,18 +33,10 @@
 			<!-- content start -->
 			<!-- include_content.jsp start-->
 			<div id="content">
-				<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
-					codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0"
-					width="540px" height="350px">
-					<param name="movie" value="image/FI_main.swf">
-					<param name="play" value="true">
-					<param name="loop" value="true">
-					<param name="quality" value="high">
-					<embed src="image/FI_main.swf" scale="exactfit" play="true"
+					<img src="image/main1.png" scale="exactfit" play="true"
 						loop="true" quality="high" style="margin: 10px;"
 						pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
 						width="540px" height="350px"></embed>
-				</object>
 			</div>
 			<!-- include_content.jsp end-->
 			<!-- content end -->

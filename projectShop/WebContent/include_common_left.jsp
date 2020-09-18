@@ -6,16 +6,23 @@
 		location.href = 'user_login_form.jsp';
 	}
 </script>
-<p>
-	<strong>메 뉴</strong>
-</p>
+
 <ul>
-	<li><a href="user_write_form.jsp">회원가입</a></li>
-	<li><a href="user_login_form.jsp">로그인</a></li>
-	<li><a href="user_view.jsp">guard1님</a>&nbsp;<a href="user_logout_action.jsp">로그아웃</a></li>
-	<li><a href="shop_product_list.jsp">쇼핑몰</a></li>
-	<li><a href="shop_jumun_list.jsp">주문목록</a></li>
-	<li><a href="shop_view_cart.jsp">장바구니</a></li>
-	<li><a href="board_list.jsp">게시판리스트</a></li>
-	<li><a href="board_write_form.jsp">게시판쓰기</a></li>
+	<strong>남 성</strong><hr>
+	<li><a href="shop_product_list.jsp">클록으</a></li>
+	<li><a href="shop_product_list.jsp">단화</a></li>
+	<li><a href="shop_product_list.jsp">플립</a></li>
+	
+</ul>
+
+<ul>
+	<strong>여 성</strong><hr>
+	<li><a href="shop_product_list.jsp">클록으</a></li>
+	<li><a href="shop_product_list.jsp">샌들</a></li>
+	<li><a href="shop_product_list.jsp">힐</a></li>
+	
+</ul>
+<ul>
+	<li><a href="board_list.jsp">리뷰보러가기</a></li>
+	<li><a href="board_write_form.jsp">리뷰쓰기</a></li>
 </ul>

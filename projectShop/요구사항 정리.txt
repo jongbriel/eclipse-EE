@@ -1,0 +1,70 @@
+크룩스 코리아
+
+모든 신발 무료배송 | 무료 반품
+
+(사이즈는 SML로)
+남성
+	클록으x4
+	단화x4
+	플립x4
+여성
+	클록으x4
+	샌들x4
+	힐x4
+
+신상품
+특가상품
+	
+회원가입
+로그인
+로그아웃
+위시리스트
+카트
+나의계정
+	위시리스트
+	주문내역조회
+	반품
+	고객서비스
+
+
+--------------------------------------------------------------------------------------------
+user
+	userId(PK)	varchar2
+	password		varchar2
+	name		varchar2
+	email		varchar2
+	phone		varchar2
+	
+
+product
+	p_no(PK)		varchar2
+	p_name		varchar2
+	p_gendor		varchar2
+	p_price		numver
+	p_image		varchar2
+	p_desc		varchar2
+	p_color		varchar2
+	(p_date)		date
+	
+cart
+	cart_itemno(PK)	number
+	userId(FK)	varchar2
+	p_no(FK)		number
+	cart_qty		number
+	cart_tot_price	number
+
+jumun
+	j_no(PK)		number
+	j_desc		varchar
+	j_date		date
+	j_price		number
+	userId(FK)	varchar2
+
+jumun_detail
+	jd_no(PK)		number
+	jd_qty		number
+	jd_pname	varchar
+	jd_tot_price	number
+	j_no(FK)		number
+	p_no(FK)		number
+	
