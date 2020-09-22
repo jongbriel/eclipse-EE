@@ -13,6 +13,8 @@ insert into user1 (userId, password, name, email, phone) Values ('jong4', '4444'
 INSERT INTO product (p_no, p_name, p_style, p_gendor, p_price, p_image, p_desc, p_color, p_date) 
 VALUES (p_no, p_name, p_style, p_gendor, p_price, p_image, p_desc, p_color, p_date);
 */
+INSERT INTO product (p_no, p_name, p_style, p_gendor, p_price, p_image, p_desc, p_color, p_date) 
+VALUES (f_c1_black, '베이클로그 우먼', p_style, p_gendor, p_price, p_image, p_desc, p_color, p_date);
 
 
 
