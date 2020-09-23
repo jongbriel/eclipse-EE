@@ -5,30 +5,14 @@
     pageEncoding="UTF-8"%>
 <%@ include file="login_check.jspf" %> 
 <%
-	String userId = request.getParameter("userId");
-	if(userId==null|| userId.equals("")){
-		response.sendRedirect("user_main.jsp");
-		return;
-	}
-	User user=null;
-	try{
-		UserService userService=new UserService();
-		user = userService.findUser(userId);
-	}catch(UserNotFoundException e){
-		out.println("<script>");
-		out.println("alert('"+e.getMessage()+"');");
-		out.println("location.href='user_list.jsp';");
-		out.println("</script>");
-			
-		return;
-	}
-
+	sUserId=(String)session.getAttribute("sUserId");
+	User user=(User)request.getAttribute("User");
 %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <title>사용자 관리</title>
-<meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel=stylesheet href="css/styles.css" type="text/css">
 <link rel=stylesheet href="css/user.css" type="text/css">
 <script type="text/javascript">
@@ -37,18 +21,18 @@
 		document.f.action = "user_list.jsp";
 		document.f.submit();
 		*/
-		location.href='user_list.jsp';
+		location.href='user_list.do';
 	}
 
 	function userModifyForm() {
-		document.f.action = "user_modify_form.jsp";
+		document.f.action = "user_modify_form.do";
 		document.f.method='POST';
 		document.f.submit();
 	}
 
 	function userRemove() {
 		if (window.confirm("정말 삭제하시겠습니까?")) {
-			document.f.action = "user_remove_action.jsp";
+			document.f.action = "user_remove_action.do";
 			document.f.method='POST';
 			document.f.submit();
 		}

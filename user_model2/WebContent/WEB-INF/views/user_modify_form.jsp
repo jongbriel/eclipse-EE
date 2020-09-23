@@ -4,14 +4,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="login_check.jspf" %>  
 <%
-	if(request.getMethod().equalsIgnoreCase("GET")){
-		response.sendRedirect("user_main.jsp");
-		return;
-	}
-	String userId=request.getParameter("userId");
-	UserService userService=new UserService();
-	User user=userService.findUser(userId);
-	
+	User user=(User)request.getAttribute("User");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -22,7 +15,7 @@
 <link rel=stylesheet href="css/user.css" type="text/css">
 <script type="text/javascript">
 	function userModify() {
-		document.f.action = "user_modify_action.jsp";
+		document.f.action = "user_modify_action.do";
 		document.f.method='POST';
 		document.f.submit();
 		
@@ -32,7 +25,7 @@
 		document.f.action = "user_list.jsp";
 		document.f.submit();
 		*/
-		location.href='user_list.jsp';
+		location.href='user_list.do';
 	}
 </script>
 </head>
