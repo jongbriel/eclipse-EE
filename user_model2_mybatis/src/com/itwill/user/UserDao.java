@@ -1,5 +1,6 @@
 package com.itwill.user;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,45 +9,41 @@ import java.util.ArrayList;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
 /*
  사용자관리에서 데이타베이스와의 작업을 전담하는 클래스
  USERINFO 테이블에 사용자를 추가,삭제,검색,수정등의 작업을한다.
  */
 public class UserDao {
-	/*
-	 * Connection을 반환해주는객체
-	 */
-	private DataSource dataSource;
 	
-	public UserDao() throws Exception {
-		InitialContext ic = new InitialContext();
-		dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/OracleDB");
-		//System.out.println("UserDao()생성자:" + this + "-->" + dataSource);
+	private SqlSessionFactory sqlSessionFactory;
+	public static final String NAMESPACE="com.mybatis3.dao.mapper.UserMapper.";
+		
+	public UserDao() {
+		try {
+			InputStream mybatisConfigInputStream=Resources.getResourceAsStream("mybatis-config.xml");
+			SqlSessionFactoryBuilder ssfb=new SqlSessionFactoryBuilder();
+			sqlSessionFactory=ssfb.build(mybatisConfigInputStream);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	/*
-	  public UserDao() throws Exception { 
-		  Properties properties=new Properties();
-		  properties.load(this.getClass().getResourceAsStream("db.properties"));
-		  BasicDataSource basicDataSource = new BasicDataSource();
-		  basicDataSource.setDriverClassName(properties.getProperty("driverClass"));
-		  basicDataSource.setUrl(properties.getProperty("url"));
-		  basicDataSource.setUsername(properties.getProperty("user"));
-		  basicDataSource.setPassword(properties.getProperty("password")); 
-		  dataSource = basicDataSource; 
-	  }
-	 */ 
 	 
 	/*
 	 * 사용자관리테이블에 새로운사용자생성
 	 */
 	public int create(User user) throws Exception {
+			
+		
+		/*
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		int insertRowCount = 0;
 		try {
-			/*
-			 * 예외발생 예상코드
-			 */
+			
 			con = dataSource.getConnection();
 			pstmt = con.prepareStatement(UserSQL.USER_INSERT);
 			pstmt.setString(1, user.getUserId());
@@ -55,9 +52,7 @@ public class UserDao {
 			pstmt.setString(4, user.getEmail());
 			insertRowCount = pstmt.executeUpdate();
 		} finally {
-			/*
-			 * 예외발생과 관계없이 반듯시 실행되는 코드
-			 */
+			
 			if (pstmt != null) {
 				pstmt.close();
 			}
@@ -66,8 +61,10 @@ public class UserDao {
 			}
 		}
 		return insertRowCount;
+		*/
+		return null;
 	}
-
+	
 	/*
 	 * 기존의 사용자정보를 수정
 	 */
