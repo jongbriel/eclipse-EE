@@ -2,7 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mybatis3.dao.mapper.StudentMapper">
 	
-	 <!-- ################### resultMap ####################### -->
+	<!-- ################### resultMap ####################### -->
+	<!-- 컬럼 네임과 프로퍼티 네임이 일치하지 않을때는 이렇게 직접 맵핑 studId, stud_id -->
+	<!-- 밑에 셀렉트할때 맵핑 규칙을 설정할때 이맵핑의 아이디를 콜 -->
 	 <resultMap  id="studentResultMap" 
 	            type="com.mybatis3.domain.Student">
 	 	     <result column="STUD_ID" property="studId"/>      
@@ -10,6 +12,7 @@
 	 	     <result column="EMAIL" property="email"/>      
 	 	     <result column="dob" property="dob"/>      
 	 </resultMap>
+	 <!-- 컬럼네임과 프라퍼티네임이 같을경우 autoMapping 가능-->
 	 <resultMap id="studentWithAddressResultMap" 
 	 			type="com.mybatis3.domain.Student"  
 	 			autoMapping="true">
@@ -40,9 +43,35 @@
 	 </resultMap>
 	 
 	<!-- ##################################################### -->
+	<!-- @@@@@@@@@@@@@@@@ SELECT Map List<Map> @@@@@@@@ -->
+	<!-- resultType Map -->
+	<!-- 파라메타에 여러값을 넣으려면 맵을 넣어야한다. 타입 하나밖에 못 넣기 때문이지. , , , 이렇게 못넣어. 맵의 키값을 넣으면됨 -->
+	<select id="findStudentByIdMap" 
+			parameterType="java.lang.Integer"
+			resultType="java.util.Map">
+		select stud_id as studid ,name,email,dob 
+		from students
+		where stud_id = #{studId}
+	</select>
 	
 	
-	<!-- @@@@@@@@@@@@@@@@@@@@@ SELECT[JOIN] @@@@@@@@@@@@@@@@@@@@@@@ -->
+	<!-- resultType List<Map> -->
+	<select id="findAllStudentsMapList" 
+		resultType="java.util.Map">
+		select stud_id as studid ,name,email,dob
+		from students
+	</select>
+	
+	
+	<!-- @@@@@@@@@@@@@@@@ SELECT ETC(String,Date,Integer,Double) @@@@@@@@ -->
+	<select id="findStudentNameList" resultType="java.lang.String">
+		select name from students
+	</select>
+	<select id="findStudentNameById" parameterType="java.lang.Integer" 
+									resultType="java.lang.String">
+		select name from students where stud_id=#{studId}
+	</select>
+	<!-- @@@@@@@@@@@@@@@@@@@@@ SELECT[JOIN] DTO,List<DTO> @@@@@@@@@@@@@@@@@@@@@@@ -->
 	<!-- resultMap: [ students + courses 조인 ]-->
 	<select id="findStudentByIdWithCourses" 
 			parameterType="java.lang.Integer"
@@ -57,6 +86,7 @@
 	</select>
 	
 	<!-- resultMap: [ students + addresses 조인 ]-->
+	<!-- join select를 사용할땐 resultMap을 활용해야한다. -->
 	<select id="findStudentByIdWithAddress" parameterType="java.lang.Integer" 
 			resultMap="studentWithAddressResultMap">
 	  select stud_id, name,dob, email,phone, a.addr_id , street, city, state, zip, country
@@ -83,6 +113,7 @@
 	</delete>
 	
 	<!-- @@@@@@@@@@@@@@@@@@@@@ UPDATE @@@@@@@@@@@@@@@@@@@@@@@ -->
+	<!-- 파라미터의 객체에 겟터가 없으면 실행안된다. 그래서 프라퍼티 네임을 정확히 써야한다. studId, stud_id-->
 	<update id="updateStudent"   parameterType="com.mybatis3.domain.Student" >
 		update students set name=#{name},email=#{email},dob=#{dob}
 		where stud_id=#{studId}
@@ -100,6 +131,7 @@
 	
 	<insert id="insertStudentBySequence2" 
 			parameterType="com.mybatis3.domain.Student">
+		<!-- 인설트전에 실행, 시퀀스를 미리 만들어서 커런트밸류 반환했듯이 시퀀스의 데이터를 쓴다. 오라클 시퀀스 뽑을때만 사용-->
 		<selectKey order="BEFORE" keyProperty="studId" resultType="int">
 			select STUDENTS_STUD_ID_SEQ.nextval from dual
 		</selectKey>
@@ -134,6 +166,28 @@
 		from students
 	</select>
 	
+	<!-- @@@@@@@@@@@@@@@@@@@@@@ parameterType[java.util.Map,java.util.HashMap,map,hashmap] @@@@@@@@@@@@@@@@@@@@@@@ -->
+	<update id="updateStudentParamMap" parameterType="java.util.Map" >
+		update students set name=#{name},email=#{email},dob=#{dob}
+		where stud_id=#{studId}
+	</update>
+	
+	<!-- gt; >     lt; < -->
+	<select id="findStudentByIdRangeParamMap" 
+			parameterType="map"
+			resultType="com.mybatis3.domain.Student">
+		select stud_id as studid ,name,email,dob 
+		from students
+		where stud_id &gt;= #{startNo} and stud_id &lt;= #{endNo}
+	</select>
+	
+	<select id="findStudentsThreeParamMap" 
+			parameterType="map"
+			resultType="com.mybatis3.domain.Student">
+		select stud_id as studid ,name,email,dob 
+		from students
+		where stud_id in(#{first.studId},#{second.studId},#{third.studId})
+	</select>
 	
 	
 </mapper>

@@ -5,7 +5,7 @@
 <configuration>
 	<properties resource="jdbc.properties"/>
 	<typeAliases>
-		<typeAlias type="com.mybatis3.domain.Student" alias="Student"/>
+		<typeAlias type="com.itwill.user.User" alias="User"/>
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -17,22 +17,10 @@
 				<property name="username" value="${jdbc.username}" />
 				<property name="password" value="${jdbc.password}" />
 			</dataSource>
-			
-			<!-- 
-			<dataSource type="POOLED">
-				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
-				<property name="url" value="jdbc:oracle:thin:@182.237.126.19:1521:XE" />
-				<property name="username" value="javapython9" />
-				<property name="password" value="javapython9" />
-			</dataSource>
-			 -->
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="com/mybatis3/dao/mapper/StudentMapper.xml"/>
-		<mapper resource="com/mybatis3/dao/mapper/CourseMapper.xml"/>
-		<mapper resource="com/mybatis3/dao/mapper/TutorMapper.xml"/>
-		<mapper resource="com/mybatis3/dao/mapper/StudentMapperDynamicSql.xml"/>
+		<mapper resource="com/itwill/user/mapper/UserMapper.xml"/>
 	</mappers>
 </configuration>
 

@@ -1,8 +1,13 @@
 package dao.emp;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import dao.common.ConnectionFactory;
 
 
 
@@ -40,13 +45,50 @@ public class EmpDaoImpl implements EmpDao {
 	// 사원정보(부서정보포함) 한개 반환
 	@Override
 	public HashMap findEmpnoWithDept(int no) throws Exception {
-		return null;
+		Connection con=ConnectionFactory.getConnection();
+		PreparedStatement pstmt=con.prepareStatement(EmpSQL.SELECT_EMPNO_WITHDEPT);
+		pstmt.setInt(1, no);
+		ResultSet rs=pstmt.executeQuery();
+		HashMap<String, Object> rowMap=new HashMap<String, Object>();
+		if (rs.next()) {
+			//어떤 타입이 튀어나올지 모르니 오브젝트타입으로
+			rowMap.put("EMPNO", rs.getInt("EMPNO"));
+			rowMap.put("ENAME", rs.getString("ENAME"));
+			rowMap.put("JOB", rs.getString("JOB"));
+			rowMap.put("MGR", rs.getInt("MGR"));
+			rowMap.put("HIREDATE", rs.getDate("HIREDATE"));
+			rowMap.put("SAL", rs.getDouble("SAL"));
+			rowMap.put("COMM", rs.getInt("COMM"));
+			rowMap.put("DEPTNO", rs.getInt("DEPTNO"));
+			rowMap.put("DNAME", rs.getString("DNAME"));
+			rowMap.put("LOC", rs.getString("LOC"));
+		}
+		return rowMap;
 	}
 	//사원정보(부서정보포함) 전체목록 반환
 	@Override
 	public ArrayList<HashMap> findEmpsWithDept() throws Exception {
+		Connection con=ConnectionFactory.getConnection();
+		PreparedStatement pstmt=con.prepareStatement(EmpSQL.SELECT_ALLEMP_WITHDEPT);
 		
-		return null;
+		ResultSet rs=pstmt.executeQuery();
+		ArrayList<HashMap> rowMapList=new ArrayList<HashMap>();
+		while (rs.next()) {
+			//어떤 타입이 튀어나올지 모르니 오브젝트타입으로
+			HashMap<String, Object> rowMap=new HashMap<String, Object>();
+			rowMap.put("EMPNO", rs.getInt("EMPNO"));
+			rowMap.put("ENAME", rs.getString("ENAME"));
+			rowMap.put("JOB", rs.getString("JOB"));
+			rowMap.put("MGR", rs.getInt("MGR"));
+			rowMap.put("HIREDATE", rs.getDate("HIREDATE"));
+			rowMap.put("SAL", rs.getDouble("SAL"));
+			rowMap.put("COMM", rs.getInt("COMM"));
+			rowMap.put("DEPTNO", rs.getInt("DEPTNO"));
+			rowMap.put("DNAME", rs.getString("DNAME"));
+			rowMap.put("LOC", rs.getString("LOC"));
+			rowMapList.add(rowMap);
+		}
+		return rowMapList;
 	}
 
 	

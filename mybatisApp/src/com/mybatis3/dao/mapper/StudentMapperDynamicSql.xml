@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis3.dao.mapper.StudentMapperDynamicSql">
+	
+	 <select id="findStudents" 
+	 		parameterType="com.mybatis3.domain.Student"
+	 		resultType="com.mybatis3.domain.Student">
+	 	select stud_id as studId, name, email, dob
+	 	from students
+	 	<if test="dob!=null">
+	 		where dob &lt; = #{dob}
+	 	</if>
+	 	
+	 </select>
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
